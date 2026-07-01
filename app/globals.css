@@ -1,8 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f4f7f5;
+  --foreground: #0f2419;
+  --unn-green: #0b5d3b;
+  --unn-gold: #c9a227;
 }
 
 @theme inline {
@@ -12,15 +14,109 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+@keyframes register-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes register-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes register-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes register-gradient-shift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(2%, 1.5%) scale(1.03);
+  }
+}
+
+.register-page {
+  min-height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.register-bg-glow {
+  animation: register-gradient-shift 18s ease-in-out infinite;
+}
+
+.register-enter {
+  animation: register-fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.register-enter-delay-1 {
+  animation-delay: 0.08s;
+}
+
+.register-enter-delay-2 {
+  animation-delay: 0.16s;
+}
+
+.register-enter-delay-3 {
+  animation-delay: 0.24s;
+}
+
+.register-enter-delay-4 {
+  animation-delay: 0.32s;
+}
+
+.register-enter-delay-5 {
+  animation-delay: 0.4s;
+}
+
+.register-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.register-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .register-bg-glow,
+  .register-enter,
+  .register-reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

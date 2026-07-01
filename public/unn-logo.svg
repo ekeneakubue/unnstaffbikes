@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <circle cx="60" cy="60" r="56" fill="#0B5D3B" stroke="#C9A227" stroke-width="4"/>
+  <circle cx="60" cy="60" r="44" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.35"/>
+  <text x="60" y="54" text-anchor="middle" fill="#ffffff" font-family="Georgia, serif" font-size="22" font-weight="700">UNN</text>
+  <text x="60" y="74" text-anchor="middle" fill="#C9A227" font-family="Arial, sans-serif" font-size="9" letter-spacing="1.5">NSUKKA</text>
+  <path d="M28 88c8-6 18-8 32-8s24 2 32 8" stroke="#C9A227" stroke-width="2" stroke-linecap="round" fill="none"/>
+</svg>
