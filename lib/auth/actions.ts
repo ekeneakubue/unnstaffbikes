@@ -7,6 +7,7 @@ import { createSession, destroySession } from "./session";
 
 export type LoginResult = {
   error?: string;
+  redirectTo?: string;
 };
 
 function safeRedirectPath(path: string | null, role: "ADMIN" | "VERIFIER") {
@@ -35,26 +36,42 @@ export async function login(
     return { error: "Email and password are required." };
   }
 
-  const user = await prisma.user.findUnique({
-    where: { email },
-    select: {
-      id: true,
-      password: true,
-      role: true,
-      isActive: true,
-    },
-  });
+  try {
+    const user = await prisma.user.findUnique({
+      where: { email },
+      select: {
+        id: true,
+        password: true,
+        role: true,
+        isActive: true,
+      },
+    });
 
-  if (!user || !user.isActive || !verifyPassword(password, user.password)) {
-    return { error: "Invalid email or password." };
+    if (!user || !user.isActive || !verifyPassword(password, user.password)) {
+      return { error: "Invalid email or password." };
+    }
+
+    if (user.role !== "ADMIN" && user.role !== "VERIFIER") {
+      return { error: "You do not have access to this portal." };
+    }
+
+    await createSession({ id: user.id, role: user.role });
+
+    return { redirectTo: safeRedirectPath(next, user.role) };
+  } catch (error) {
+    if (
+      error instanceof Error &&
+      error.message.includes("AUTH_SECRET is not set")
+    ) {
+      return {
+        error:
+          "Sign-in is not configured on the server. Set AUTH_SECRET in production environment variables.",
+      };
+    }
+
+    console.error("Login failed:", error);
+    return { error: "Unable to sign in right now. Please try again." };
   }
-
-  if (user.role !== "ADMIN" && user.role !== "VERIFIER") {
-    return { error: "You do not have access to this portal." };
-  }
-
-  await createSession({ id: user.id, role: user.role });
-  redirect(safeRedirectPath(next, user.role));
 }
 
 export async function logout() {

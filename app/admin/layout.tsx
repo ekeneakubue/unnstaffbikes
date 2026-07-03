@@ -1,6 +1,8 @@
 import { requireAdmin } from "@/lib/auth/require-user";
 import AdminShell from "./components/AdminShell";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminLayout({
   children,
 }: {

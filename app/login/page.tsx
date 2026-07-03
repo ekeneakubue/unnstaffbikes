@@ -4,6 +4,8 @@ import { redirect } from "next/navigation";
 import StaffLoginForm from "@/components/StaffLoginForm";
 import { getCurrentUser } from "@/lib/auth/get-current-user";
 
+export const dynamic = "force-dynamic";
+
 type SearchParams = Promise<{ next?: string }>;
 
 export default async function LoginPage({
