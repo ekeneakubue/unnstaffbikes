@@ -30,7 +30,7 @@ export default function Home() {
         </h1>
 
         <p className="mt-4 max-w-lg text-sm leading-relaxed text-[#4a5f52] sm:mt-5 sm:text-base">
-          A secure platform for UNN staff to register personal bicycles for
+          A secure platform for UNN staff to register personal motorcycles and bicycles for
           proper documentation, campus identification, and ownership verification.
         </p>
 

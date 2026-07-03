@@ -36,13 +36,20 @@ export function getR2Config(): R2Config {
 }
 
 export function buildPublicUrl(key: string) {
-  const { publicUrl, bucketName, accountId } = getR2Config();
+  const { publicUrl } = getR2Config();
 
   if (publicUrl) {
-    return `${publicUrl.replace(/\/$/, "")}/${key}`;
+    try {
+      const hostname = new URL(publicUrl).hostname;
+      if (!hostname.endsWith("r2.cloudflarestorage.com")) {
+        return `${publicUrl.replace(/\/$/, "")}/${key}`;
+      }
+    } catch {
+      // Fall through to app-served photo URL.
+    }
   }
 
-  return `https://${accountId}.r2.cloudflarestorage.com/${bucketName}/${key}`;
+  return `/api/photos/${key}`;
 }
 
 export function isR2Configured() {

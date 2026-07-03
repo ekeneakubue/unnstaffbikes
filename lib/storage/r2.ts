@@ -1,5 +1,6 @@
 import {
   DeleteObjectCommand,
+  GetObjectCommand,
   PutObjectCommand,
   S3Client,
 } from "@aws-sdk/client-s3";
@@ -134,6 +135,27 @@ async function deleteFromR2S3(key: string) {
       Key: key,
     }),
   );
+}
+
+export async function getObjectFromR2(key: string) {
+  const { bucketName } = getR2Config();
+  const client = getR2Client();
+
+  const response = await client.send(
+    new GetObjectCommand({
+      Bucket: bucketName,
+      Key: key,
+    }),
+  );
+
+  if (!response.Body) {
+    throw new Error(`R2 object not found: ${key}`);
+  }
+
+  return {
+    body: response.Body.transformToWebStream(),
+    contentType: response.ContentType ?? "application/octet-stream",
+  };
 }
 
 export { buildPublicUrl } from "./r2-config";

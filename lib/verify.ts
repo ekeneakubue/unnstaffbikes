@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { getPhotoSrc } from "@/lib/storage/photo-url";
 
 export type VerifiedOwner = {
   firstname: string;
@@ -57,7 +58,7 @@ export async function findApplicantForVerification(
     motorcycleNo: applicant.motorcycleNo,
     motorcycleMake: applicant.motorcycleMake,
     engineNumber: applicant.engineNumber,
-    photoUrl: applicant.profilePhotoUrl ?? undefined,
+    photoUrl: getPhotoSrc(applicant.profilePhotoUrl) ?? undefined,
     status: applicant.status,
   };
 }

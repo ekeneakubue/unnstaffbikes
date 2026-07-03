@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { shouldBypassImageOptimization } from "@/lib/storage/photo-url";
 
 const inputClassName =
   "w-full rounded-xl border border-[#0B5D3B]/20 bg-white px-4 py-3 text-sm text-[#0f2419] outline-none transition duration-200 placeholder:text-[#8a9a90] focus:border-[#0B5D3B] focus:ring-2 focus:ring-[#0B5D3B]/15";
@@ -190,7 +191,7 @@ export default function VerifyForm() {
                       src={owner.photoUrl}
                       alt={`${owner.firstname} ${owner.surname}`}
                       fill
-                      unoptimized={owner.photoUrl.startsWith("/uploads/")}
+                      unoptimized={shouldBypassImageOptimization(owner.photoUrl)}
                       className="object-cover"
                     />
                   ) : (

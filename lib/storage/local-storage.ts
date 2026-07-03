@@ -1,7 +1,19 @@
-import { mkdir, unlink, writeFile } from "node:fs/promises";
+import { mkdir, readFile, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads");
+
+const extensionContentTypes: Record<string, string> = {
+  jpg: "image/jpeg",
+  jpeg: "image/jpeg",
+  png: "image/png",
+  webp: "image/webp",
+};
+
+function contentTypeFromKey(key: string) {
+  const extension = key.split(".").pop()?.toLowerCase() ?? "";
+  return extensionContentTypes[extension] ?? "application/octet-stream";
+}
 
 export function isLocalStorageEnabled() {
   return process.env.NODE_ENV === "development";
@@ -34,4 +46,13 @@ export async function deleteFromLocalStorage(key: string) {
   } catch {
     // Ignore missing files during cleanup.
   }
+}
+
+export async function readLocalPhoto(key: string) {
+  const filePath = localFilePath(key);
+  const body = await readFile(filePath);
+  return {
+    body,
+    contentType: contentTypeFromKey(key),
+  };
 }
