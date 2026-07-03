@@ -69,10 +69,12 @@ function RevealSection({
 }
 
 export default function RegisterForm() {
-  const profilePhotoInputRef = useRef<HTMLInputElement>(null);
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const [profilePhoto, setProfilePhoto] = useState<File | null>(null);
   const [stateOfOrigin, setStateOfOrigin] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const localGovernments = useMemo(
     () => (stateOfOrigin ? nigeriaStates[stateOfOrigin] ?? [] : []),
@@ -85,17 +87,49 @@ export default function RegisterForm() {
       if (current) URL.revokeObjectURL(current);
       return previewUrl;
     });
-
-    if (profilePhotoInputRef.current) {
-      const dataTransfer = new DataTransfer();
-      dataTransfer.items.add(file);
-      profilePhotoInputRef.current.files = dataTransfer.files;
-    }
   }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!profilePhoto) return;
+    if (!profilePhoto || submitSuccess) return;
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const form = event.currentTarget;
+      const formData = new FormData(form);
+      formData.set("profilePhoto", profilePhoto);
+
+      const response = await fetch("/api/register", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = (await response.json()) as {
+        id?: string;
+        error?: string;
+      };
+
+      if (!response.ok || !result.id) {
+        throw new Error(result.error ?? "Registration failed.");
+      }
+
+      setSubmitSuccess(true);
+      form.reset();
+      setStateOfOrigin("");
+      setProfilePhoto(null);
+      setAvatarPreview((current) => {
+        if (current) URL.revokeObjectURL(current);
+        return null;
+      });
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error ? error.message : "Registration failed.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -152,16 +186,6 @@ export default function RegisterForm() {
               <CameraCapture
                 preview={avatarPreview}
                 onCapture={handleAvatarCapture}
-              />
-
-              <input
-                ref={profilePhotoInputRef}
-                type="file"
-                name="profilePhoto"
-                accept="image/jpeg"
-                className="sr-only"
-                tabIndex={-1}
-                aria-hidden
               />
 
               <p className="mt-3 max-w-xs text-center text-xs text-[#6b7f73]">
@@ -332,17 +356,36 @@ export default function RegisterForm() {
           </RevealSection>
 
           <div className="register-enter register-enter-delay-5 mt-8 flex flex-col gap-3 sm:flex-row sm:justify-end">
+            {submitError ? (
+              <p
+                role="alert"
+                className="whitespace-pre-line text-center text-sm text-[#b91c1c] sm:mr-auto sm:flex sm:items-center sm:text-left"
+              >
+                {submitError}
+              </p>
+            ) : null}
+            {submitSuccess ? (
+              <p className="text-center text-sm text-[#0B5D3B] sm:mr-auto sm:flex sm:items-center sm:text-left">
+                Registration submitted successfully. Your application is pending
+                review.
+              </p>
+            ) : null}
             <Link
               href="/"
               className="inline-flex h-12 items-center justify-center rounded-xl border-2 border-[#0B5D3B]/25 px-6 text-sm font-semibold text-[#0B5D3B] transition duration-200 hover:-translate-y-0.5 hover:bg-[#0B5D3B]/5"
             >
-              Cancel
+              {submitSuccess ? "Back to home" : "Cancel"}
             </Link>
             <button
               type="submit"
-              className="inline-flex h-12 items-center justify-center rounded-xl bg-[#0B5D3B] px-8 text-sm font-semibold text-white shadow-[0_4px_14px_rgba(11,93,59,0.35)] transition duration-200 hover:-translate-y-0.5 hover:bg-[#094a31] hover:shadow-[0_6px_20px_rgba(11,93,59,0.4)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0B5D3B] active:scale-[0.98]"
+              disabled={isSubmitting || submitSuccess || !profilePhoto}
+              className="inline-flex h-12 items-center justify-center rounded-xl bg-[#0B5D3B] px-8 text-sm font-semibold text-white shadow-[0_4px_14px_rgba(11,93,59,0.35)] transition duration-200 hover:-translate-y-0.5 hover:bg-[#094a31] hover:shadow-[0_6px_20px_rgba(11,93,59,0.4)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0B5D3B] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70"
             >
-              Submit Registration
+              {isSubmitting
+                ? "Submitting…"
+                : submitSuccess
+                  ? "Submitted"
+                  : "Submit Registration"}
             </button>
           </div>
         </form>

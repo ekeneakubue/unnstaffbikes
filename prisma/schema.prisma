@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  ADMIN
+  VERIFIER
+}
+
+enum ApplicantStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum DepartmentType {
+  DEPARTMENT
+  CENTER
+  UNIT
+}
+
+model User {
+  id              String   @id @default(cuid())
+  email           String   @unique
+  password        String
+  firstname       String
+  surname         String
+  profilePhotoUrl String?
+  role            UserRole @default(VERIFIER)
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  verifiedApplicants Applicant[] @relation("VerifiedBy")
+
+  @@map("users")
+}
+
+model Department {
+  id        String         @id @default(cuid())
+  name      String         @unique
+  type      DepartmentType @default(DEPARTMENT)
+  isActive  Boolean        @default(true)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  applicants Applicant[]
+
+  @@map("departments")
+}
+
+model Applicant {
+  id              String          @id @default(cuid())
+  firstname       String
+  surname         String
+  phoneNumber     String
+  staffNumber     String          @unique
+  departmentId    String
+  department      Department      @relation(fields: [departmentId], references: [id])
+  stateOfOrigin   String
+  localGovernment String
+  motorcycleNo    String          @unique
+  motorcycleMake  String
+  engineNumber    String          @unique
+  profilePhotoUrl String?
+  status          ApplicantStatus @default(PENDING)
+  verifiedAt      DateTime?
+  verifiedById    String?
+  verifiedBy      User?           @relation("VerifiedBy", fields: [verifiedById], references: [id], onDelete: SetNull)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@index([staffNumber])
+  @@index([motorcycleNo])
+  @@index([departmentId])
+  @@map("applicants")
+}
