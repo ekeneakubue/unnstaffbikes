@@ -1,4 +1,6 @@
+import { Prisma } from "@/lib/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
+import { normalizeVerificationQuery } from "@/lib/normalize-verification-query";
 import { getPhotoSrc } from "@/lib/storage/photo-url";
 
 export type VerifiedOwner = {
@@ -13,52 +15,65 @@ export type VerifiedOwner = {
   status: "PENDING" | "APPROVED" | "REJECTED";
 };
 
+type VerificationRow = {
+  firstname: string;
+  surname: string;
+  staffNumber: string;
+  motorcycleNo: string;
+  motorcycleMake: string;
+  engineNumber: string;
+  profilePhotoUrl: string | null;
+  status: "PENDING" | "APPROVED" | "REJECTED";
+  departmentName: string;
+};
+
+function mapVerificationRow(row: VerificationRow): VerifiedOwner {
+  return {
+    firstname: row.firstname,
+    surname: row.surname,
+    staffNumber: row.staffNumber,
+    department: row.departmentName,
+    motorcycleNo: row.motorcycleNo,
+    motorcycleMake: row.motorcycleMake,
+    engineNumber: row.engineNumber,
+    photoUrl: getPhotoSrc(row.profilePhotoUrl) ?? undefined,
+    status: row.status,
+  };
+}
+
 export async function findApplicantForVerification(
   query: string,
 ): Promise<VerifiedOwner | null> {
-  const applicant = await prisma.applicant.findFirst({
-    where: {
-      OR: [
-        {
-          staffNumber: {
-            equals: query,
-            mode: "insensitive",
-          },
-        },
-        {
-          motorcycleNo: {
-            equals: query,
-            mode: "insensitive",
-          },
-        },
-      ],
-    },
-    select: {
-      firstname: true,
-      surname: true,
-      staffNumber: true,
-      motorcycleNo: true,
-      motorcycleMake: true,
-      engineNumber: true,
-      profilePhotoUrl: true,
-      status: true,
-      department: { select: { name: true } },
-    },
-  });
+  const normalizedQuery = normalizeVerificationQuery(query);
+
+  if (!normalizedQuery) {
+    return null;
+  }
+
+  const rows = await prisma.$queryRaw<VerificationRow[]>(Prisma.sql`
+    SELECT
+      a."firstname",
+      a."surname",
+      a."staffNumber",
+      a."motorcycleNo",
+      a."motorcycleMake",
+      a."engineNumber",
+      a."profilePhotoUrl",
+      a."status",
+      d."name" AS "departmentName"
+    FROM "applicants" a
+    INNER JOIN "departments" d ON d."id" = a."departmentId"
+    WHERE
+      LOWER(REPLACE(REPLACE(a."staffNumber", ' ', ''), '.', '/')) = ${normalizedQuery}
+      OR LOWER(REPLACE(REPLACE(a."motorcycleNo", ' ', ''), '.', '/')) = ${normalizedQuery}
+    LIMIT 1
+  `);
+
+  const applicant = rows[0];
 
   if (!applicant) {
     return null;
   }
 
-  return {
-    firstname: applicant.firstname,
-    surname: applicant.surname,
-    staffNumber: applicant.staffNumber,
-    department: applicant.department.name,
-    motorcycleNo: applicant.motorcycleNo,
-    motorcycleMake: applicant.motorcycleMake,
-    engineNumber: applicant.engineNumber,
-    photoUrl: getPhotoSrc(applicant.profilePhotoUrl) ?? undefined,
-    status: applicant.status,
-  };
+  return mapVerificationRow(applicant);
 }

@@ -37,13 +37,13 @@ export default function Home() {
         <div className="mt-8 flex w-full max-w-md flex-col gap-3 sm:mt-10 sm:flex-row sm:justify-center">
           <Link
             href="/register"
-            className="inline-flex h-12 flex-1 items-center justify-center rounded-xl bg-[#0B5D3B] px-6 text-sm font-semibold text-white shadow-[0_4px_14px_rgba(11,93,59,0.35)] transition hover:bg-[#094a31] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0B5D3B] sm:text-base"
+            className="inline-flex flex-1 items-center justify-center rounded-[10px] bg-[#0B5D3B] px-8 py-4 text-sm font-semibold text-white shadow-[0_4px_14px_rgba(11,93,59,0.35)] transition hover:bg-[#094a31] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0B5D3B] sm:text-base"
           >
             Register Your Bike
           </Link>
           <Link
             href="/verify"
-            className="inline-flex h-12 flex-1 items-center justify-center rounded-xl border-2 border-[#0B5D3B] bg-white px-6 text-sm font-semibold text-[#0B5D3B] transition hover:bg-[#0B5D3B]/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0B5D3B] sm:text-base"
+            className="inline-flex flex-1 items-center justify-center rounded-[10px] border-2 border-[#0B5D3B] bg-white px-8 py-4 text-sm font-semibold text-[#0B5D3B] transition hover:bg-[#0B5D3B]/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0B5D3B] sm:text-base"
           >
             Verify Owner
           </Link>
