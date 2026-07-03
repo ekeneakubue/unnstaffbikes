@@ -10,9 +10,11 @@ import {
 export default function ApplicantAvatar({
   name,
   photoUrl,
+  size = "md",
 }: {
   name: string;
   photoUrl: string | null;
+  size?: "md" | "lg";
 }) {
   const [failed, setFailed] = useState(false);
 
@@ -24,13 +26,18 @@ export default function ApplicantAvatar({
     .join("");
 
   const src = getPhotoSrc(photoUrl);
+  const isLarge = size === "lg";
+  const className = isLarge
+    ? "h-16 w-16 shrink-0 rounded-full object-cover ring-2 ring-[#0B5D3B]/15"
+    : "h-10 w-10 shrink-0 rounded-full object-cover ring-1 ring-[#0B5D3B]/10";
+  const fallbackClassName = isLarge
+    ? "flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[#0B5D3B]/10 text-base font-bold text-[#0B5D3B]"
+    : "flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0B5D3B]/10 text-xs font-bold text-[#0B5D3B]";
+  const dimension = isLarge ? 64 : 40;
 
   if (!src || failed) {
     return (
-      <span
-        aria-hidden
-        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0B5D3B]/10 text-xs font-bold text-[#0B5D3B]"
-      >
+      <span aria-hidden className={fallbackClassName}>
         {initials || "?"}
       </span>
     );
@@ -40,11 +47,11 @@ export default function ApplicantAvatar({
     <Image
       src={src}
       alt={`${name} profile`}
-      width={40}
-      height={40}
+      width={dimension}
+      height={dimension}
       unoptimized={shouldBypassImageOptimization(src)}
       onError={() => setFailed(true)}
-      className="h-10 w-10 shrink-0 rounded-full object-cover ring-1 ring-[#0B5D3B]/10"
+      className={className}
     />
   );
 }

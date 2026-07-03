@@ -42,13 +42,7 @@ export default function Home() {
             Register Your Bike
           </Link>
           <Link
-            href="/verify"
-            className="inline-flex flex-1 items-center justify-center rounded-[10px] border-2 border-[#0B5D3B] bg-white px-8 py-4 text-sm font-semibold text-[#0B5D3B] transition hover:bg-[#0B5D3B]/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0B5D3B] sm:min-w-[10rem] sm:flex-none sm:text-base"
-          >
-            Verify Owner
-          </Link>
-          <Link
-            href="/admin"
+            href="/login"
             className="inline-flex flex-1 items-center justify-center rounded-[10px] border-2 border-[#C9A227] bg-white px-8 py-4 text-sm font-semibold text-[#8a6f12] transition hover:bg-[#C9A227]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C9A227] sm:min-w-[10rem] sm:flex-none sm:text-base"
           >
             Admin

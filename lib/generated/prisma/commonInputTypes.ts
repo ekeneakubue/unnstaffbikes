@@ -140,23 +140,6 @@ export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>
 }
 
-export type EnumDepartmentTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.DepartmentType | Prisma.EnumDepartmentTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.DepartmentType[] | Prisma.ListEnumDepartmentTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.DepartmentType[] | Prisma.ListEnumDepartmentTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumDepartmentTypeFilter<$PrismaModel> | $Enums.DepartmentType
-}
-
-export type EnumDepartmentTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.DepartmentType | Prisma.EnumDepartmentTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.DepartmentType[] | Prisma.ListEnumDepartmentTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.DepartmentType[] | Prisma.ListEnumDepartmentTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumDepartmentTypeWithAggregatesFilter<$PrismaModel> | $Enums.DepartmentType
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumDepartmentTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumDepartmentTypeFilter<$PrismaModel>
-}
-
 export type EnumApplicantStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.ApplicantStatus | Prisma.EnumApplicantStatusFieldRefInput<$PrismaModel>
   in?: $Enums.ApplicantStatus[] | Prisma.ListEnumApplicantStatusFieldRefInput<$PrismaModel>
@@ -336,23 +319,6 @@ export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedDateTimeFilter<$PrismaModel>
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>
-}
-
-export type NestedEnumDepartmentTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.DepartmentType | Prisma.EnumDepartmentTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.DepartmentType[] | Prisma.ListEnumDepartmentTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.DepartmentType[] | Prisma.ListEnumDepartmentTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumDepartmentTypeFilter<$PrismaModel> | $Enums.DepartmentType
-}
-
-export type NestedEnumDepartmentTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.DepartmentType | Prisma.EnumDepartmentTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.DepartmentType[] | Prisma.ListEnumDepartmentTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.DepartmentType[] | Prisma.ListEnumDepartmentTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumDepartmentTypeWithAggregatesFilter<$PrismaModel> | $Enums.DepartmentType
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumDepartmentTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumDepartmentTypeFilter<$PrismaModel>
 }
 
 export type NestedEnumApplicantStatusFilter<$PrismaModel = never> = {

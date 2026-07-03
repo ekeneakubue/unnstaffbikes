@@ -1,9 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import LogoutButton from "@/components/LogoutButton";
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: "▦" },
   { href: "/admin/users", label: "Users", icon: "◎" },
+  { href: "/admin/faculties", label: "Manage faculties", icon: "▥" },
+  { href: "/admin/departments", label: "Manage departments", icon: "▤" },
+  { href: "/admin/stations", label: "Manage stations", icon: "⌂" },
   { href: "/admin/applicants", label: "Applicants", icon: "☰" },
 ];
 
@@ -73,13 +77,7 @@ export default function AdminSidebar({
       </nav>
 
       <div className="border-t border-[#0B5D3B]/10 px-5 py-4">
-        <Link
-          href="/"
-          onClick={onNavigate}
-          className="text-sm font-medium text-[#0B5D3B] transition hover:text-[#094a31]"
-        >
-          ← Back to portal
-        </Link>
+        <LogoutButton />
       </div>
     </aside>
   );

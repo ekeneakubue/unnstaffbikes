@@ -52,7 +52,9 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
+  Faculty: 'Faculty',
   Department: 'Department',
+  Station: 'Station',
   Applicant: 'Applicant'
 } as const
 
@@ -88,16 +90,38 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const FacultyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FacultyScalarFieldEnum = (typeof FacultyScalarFieldEnum)[keyof typeof FacultyScalarFieldEnum]
+
+
 export const DepartmentScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  type: 'type',
+  facultyId: 'facultyId',
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type DepartmentScalarFieldEnum = (typeof DepartmentScalarFieldEnum)[keyof typeof DepartmentScalarFieldEnum]
+
+
+export const StationScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StationScalarFieldEnum = (typeof StationScalarFieldEnum)[keyof typeof StationScalarFieldEnum]
 
 
 export const ApplicantScalarFieldEnum = {
@@ -116,6 +140,9 @@ export const ApplicantScalarFieldEnum = {
   status: 'status',
   verifiedAt: 'verifiedAt',
   verifiedById: 'verifiedById',
+  isParked: 'isParked',
+  parkedAt: 'parkedAt',
+  parkedById: 'parkedById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

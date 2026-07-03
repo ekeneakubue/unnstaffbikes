@@ -1,6 +1,8 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import type { UserRole } from "@/lib/generated/prisma/client";
+import { requireAdmin } from "@/lib/auth/require-user";
 import { hashPassword } from "@/lib/password";
 import { prisma } from "@/lib/prisma";
 import {
@@ -15,6 +17,8 @@ export async function createUser(
   _prevState: CreateUserState,
   formData: FormData,
 ): Promise<CreateUserState> {
+  await requireAdmin();
+
   const firstname = String(formData.get("firstname") ?? "").trim();
   const surname = String(formData.get("surname") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim().toLowerCase();
@@ -71,6 +75,8 @@ export async function createUser(
 
     return { error: "Failed to create user. Please try again." };
   }
+
+  revalidatePath("/admin/users");
 
   return { success: true };
 }

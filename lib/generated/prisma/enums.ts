@@ -24,12 +24,3 @@ export const ApplicantStatus = {
 } as const
 
 export type ApplicantStatus = (typeof ApplicantStatus)[keyof typeof ApplicantStatus]
-
-
-export const DepartmentType = {
-  DEPARTMENT: 'DEPARTMENT',
-  CENTER: 'CENTER',
-  UNIT: 'UNIT'
-} as const
-
-export type DepartmentType = (typeof DepartmentType)[keyof typeof DepartmentType]

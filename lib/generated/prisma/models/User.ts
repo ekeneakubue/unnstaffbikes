@@ -223,6 +223,7 @@ export type UserWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   verifiedApplicants?: Prisma.ApplicantListRelationFilter
+  parkedApplicants?: Prisma.ApplicantListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -237,6 +238,7 @@ export type UserOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   verifiedApplicants?: Prisma.ApplicantOrderByRelationAggregateInput
+  parkedApplicants?: Prisma.ApplicantOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -254,6 +256,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   verifiedApplicants?: Prisma.ApplicantListRelationFilter
+  parkedApplicants?: Prisma.ApplicantListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -300,6 +303,7 @@ export type UserCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   verifiedApplicants?: Prisma.ApplicantCreateNestedManyWithoutVerifiedByInput
+  parkedApplicants?: Prisma.ApplicantCreateNestedManyWithoutParkedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -314,6 +318,7 @@ export type UserUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   verifiedApplicants?: Prisma.ApplicantUncheckedCreateNestedManyWithoutVerifiedByInput
+  parkedApplicants?: Prisma.ApplicantUncheckedCreateNestedManyWithoutParkedByInput
 }
 
 export type UserUpdateInput = {
@@ -328,6 +333,7 @@ export type UserUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedApplicants?: Prisma.ApplicantUpdateManyWithoutVerifiedByNestedInput
+  parkedApplicants?: Prisma.ApplicantUpdateManyWithoutParkedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -342,6 +348,7 @@ export type UserUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedApplicants?: Prisma.ApplicantUncheckedUpdateManyWithoutVerifiedByNestedInput
+  parkedApplicants?: Prisma.ApplicantUncheckedUpdateManyWithoutParkedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -453,6 +460,12 @@ export type UserCreateNestedOneWithoutVerifiedApplicantsInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
+export type UserCreateNestedOneWithoutParkedApplicantsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutParkedApplicantsInput, Prisma.UserUncheckedCreateWithoutParkedApplicantsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutParkedApplicantsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
 export type UserUpdateOneWithoutVerifiedApplicantsNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutVerifiedApplicantsInput, Prisma.UserUncheckedCreateWithoutVerifiedApplicantsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutVerifiedApplicantsInput
@@ -461,6 +474,16 @@ export type UserUpdateOneWithoutVerifiedApplicantsNestedInput = {
   delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutVerifiedApplicantsInput, Prisma.UserUpdateWithoutVerifiedApplicantsInput>, Prisma.UserUncheckedUpdateWithoutVerifiedApplicantsInput>
+}
+
+export type UserUpdateOneWithoutParkedApplicantsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutParkedApplicantsInput, Prisma.UserUncheckedCreateWithoutParkedApplicantsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutParkedApplicantsInput
+  upsert?: Prisma.UserUpsertWithoutParkedApplicantsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutParkedApplicantsInput, Prisma.UserUpdateWithoutParkedApplicantsInput>, Prisma.UserUncheckedUpdateWithoutParkedApplicantsInput>
 }
 
 export type UserCreateWithoutVerifiedApplicantsInput = {
@@ -474,6 +497,7 @@ export type UserCreateWithoutVerifiedApplicantsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  parkedApplicants?: Prisma.ApplicantCreateNestedManyWithoutParkedByInput
 }
 
 export type UserUncheckedCreateWithoutVerifiedApplicantsInput = {
@@ -487,11 +511,45 @@ export type UserUncheckedCreateWithoutVerifiedApplicantsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  parkedApplicants?: Prisma.ApplicantUncheckedCreateNestedManyWithoutParkedByInput
 }
 
 export type UserCreateOrConnectWithoutVerifiedApplicantsInput = {
   where: Prisma.UserWhereUniqueInput
   create: Prisma.XOR<Prisma.UserCreateWithoutVerifiedApplicantsInput, Prisma.UserUncheckedCreateWithoutVerifiedApplicantsInput>
+}
+
+export type UserCreateWithoutParkedApplicantsInput = {
+  id?: string
+  email: string
+  password: string
+  firstname: string
+  surname: string
+  profilePhotoUrl?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  verifiedApplicants?: Prisma.ApplicantCreateNestedManyWithoutVerifiedByInput
+}
+
+export type UserUncheckedCreateWithoutParkedApplicantsInput = {
+  id?: string
+  email: string
+  password: string
+  firstname: string
+  surname: string
+  profilePhotoUrl?: string | null
+  role?: $Enums.UserRole
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  verifiedApplicants?: Prisma.ApplicantUncheckedCreateNestedManyWithoutVerifiedByInput
+}
+
+export type UserCreateOrConnectWithoutParkedApplicantsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutParkedApplicantsInput, Prisma.UserUncheckedCreateWithoutParkedApplicantsInput>
 }
 
 export type UserUpsertWithoutVerifiedApplicantsInput = {
@@ -516,6 +574,7 @@ export type UserUpdateWithoutVerifiedApplicantsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  parkedApplicants?: Prisma.ApplicantUpdateManyWithoutParkedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVerifiedApplicantsInput = {
@@ -529,6 +588,46 @@ export type UserUncheckedUpdateWithoutVerifiedApplicantsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  parkedApplicants?: Prisma.ApplicantUncheckedUpdateManyWithoutParkedByNestedInput
+}
+
+export type UserUpsertWithoutParkedApplicantsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutParkedApplicantsInput, Prisma.UserUncheckedUpdateWithoutParkedApplicantsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutParkedApplicantsInput, Prisma.UserUncheckedCreateWithoutParkedApplicantsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutParkedApplicantsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutParkedApplicantsInput, Prisma.UserUncheckedUpdateWithoutParkedApplicantsInput>
+}
+
+export type UserUpdateWithoutParkedApplicantsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  surname?: Prisma.StringFieldUpdateOperationsInput | string
+  profilePhotoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  verifiedApplicants?: Prisma.ApplicantUpdateManyWithoutVerifiedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutParkedApplicantsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  surname?: Prisma.StringFieldUpdateOperationsInput | string
+  profilePhotoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  verifiedApplicants?: Prisma.ApplicantUncheckedUpdateManyWithoutVerifiedByNestedInput
 }
 
 
@@ -538,10 +637,12 @@ export type UserUncheckedUpdateWithoutVerifiedApplicantsInput = {
 
 export type UserCountOutputType = {
   verifiedApplicants: number
+  parkedApplicants: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   verifiedApplicants?: boolean | UserCountOutputTypeCountVerifiedApplicantsArgs
+  parkedApplicants?: boolean | UserCountOutputTypeCountParkedApplicantsArgs
 }
 
 /**
@@ -561,6 +662,13 @@ export type UserCountOutputTypeCountVerifiedApplicantsArgs<ExtArgs extends runti
   where?: Prisma.ApplicantWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountParkedApplicantsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ApplicantWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -574,6 +682,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdAt?: boolean
   updatedAt?: boolean
   verifiedApplicants?: boolean | Prisma.User$verifiedApplicantsArgs<ExtArgs>
+  parkedApplicants?: boolean | Prisma.User$parkedApplicantsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -619,6 +728,7 @@ export type UserSelectScalar = {
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "firstname" | "surname" | "profilePhotoUrl" | "role" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   verifiedApplicants?: boolean | Prisma.User$verifiedApplicantsArgs<ExtArgs>
+  parkedApplicants?: boolean | Prisma.User$parkedApplicantsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -628,6 +738,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     verifiedApplicants: Prisma.$ApplicantPayload<ExtArgs>[]
+    parkedApplicants: Prisma.$ApplicantPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1035,6 +1146,7 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   verifiedApplicants<T extends Prisma.User$verifiedApplicantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$verifiedApplicantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApplicantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  parkedApplicants<T extends Prisma.User$parkedApplicantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$parkedApplicantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApplicantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1470,6 +1582,30 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
  * User.verifiedApplicants
  */
 export type User$verifiedApplicantsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Applicant
+   */
+  select?: Prisma.ApplicantSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Applicant
+   */
+  omit?: Prisma.ApplicantOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ApplicantInclude<ExtArgs> | null
+  where?: Prisma.ApplicantWhereInput
+  orderBy?: Prisma.ApplicantOrderByWithRelationInput | Prisma.ApplicantOrderByWithRelationInput[]
+  cursor?: Prisma.ApplicantWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ApplicantScalarFieldEnum | Prisma.ApplicantScalarFieldEnum[]
+}
+
+/**
+ * User.parkedApplicants
+ */
+export type User$parkedApplicantsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Applicant
    */

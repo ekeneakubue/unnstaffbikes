@@ -27,7 +27,7 @@ export type AggregateDepartment = {
 export type DepartmentMinAggregateOutputType = {
   id: string | null
   name: string | null
-  type: $Enums.DepartmentType | null
+  facultyId: string | null
   isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -36,7 +36,7 @@ export type DepartmentMinAggregateOutputType = {
 export type DepartmentMaxAggregateOutputType = {
   id: string | null
   name: string | null
-  type: $Enums.DepartmentType | null
+  facultyId: string | null
   isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -45,7 +45,7 @@ export type DepartmentMaxAggregateOutputType = {
 export type DepartmentCountAggregateOutputType = {
   id: number
   name: number
-  type: number
+  facultyId: number
   isActive: number
   createdAt: number
   updatedAt: number
@@ -56,7 +56,7 @@ export type DepartmentCountAggregateOutputType = {
 export type DepartmentMinAggregateInputType = {
   id?: true
   name?: true
-  type?: true
+  facultyId?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -65,7 +65,7 @@ export type DepartmentMinAggregateInputType = {
 export type DepartmentMaxAggregateInputType = {
   id?: true
   name?: true
-  type?: true
+  facultyId?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -74,7 +74,7 @@ export type DepartmentMaxAggregateInputType = {
 export type DepartmentCountAggregateInputType = {
   id?: true
   name?: true
-  type?: true
+  facultyId?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -156,7 +156,7 @@ export type DepartmentGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 export type DepartmentGroupByOutputType = {
   id: string
   name: string
-  type: $Enums.DepartmentType
+  facultyId: string
   isActive: boolean
   createdAt: Date
   updatedAt: Date
@@ -186,20 +186,22 @@ export type DepartmentWhereInput = {
   NOT?: Prisma.DepartmentWhereInput | Prisma.DepartmentWhereInput[]
   id?: Prisma.StringFilter<"Department"> | string
   name?: Prisma.StringFilter<"Department"> | string
-  type?: Prisma.EnumDepartmentTypeFilter<"Department"> | $Enums.DepartmentType
+  facultyId?: Prisma.StringFilter<"Department"> | string
   isActive?: Prisma.BoolFilter<"Department"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Department"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Department"> | Date | string
+  faculty?: Prisma.XOR<Prisma.FacultyScalarRelationFilter, Prisma.FacultyWhereInput>
   applicants?: Prisma.ApplicantListRelationFilter
 }
 
 export type DepartmentOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  type?: Prisma.SortOrder
+  facultyId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  faculty?: Prisma.FacultyOrderByWithRelationInput
   applicants?: Prisma.ApplicantOrderByRelationAggregateInput
 }
 
@@ -209,17 +211,18 @@ export type DepartmentWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.DepartmentWhereInput | Prisma.DepartmentWhereInput[]
   OR?: Prisma.DepartmentWhereInput[]
   NOT?: Prisma.DepartmentWhereInput | Prisma.DepartmentWhereInput[]
-  type?: Prisma.EnumDepartmentTypeFilter<"Department"> | $Enums.DepartmentType
+  facultyId?: Prisma.StringFilter<"Department"> | string
   isActive?: Prisma.BoolFilter<"Department"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Department"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Department"> | Date | string
+  faculty?: Prisma.XOR<Prisma.FacultyScalarRelationFilter, Prisma.FacultyWhereInput>
   applicants?: Prisma.ApplicantListRelationFilter
 }, "id" | "name">
 
 export type DepartmentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  type?: Prisma.SortOrder
+  facultyId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -234,7 +237,7 @@ export type DepartmentScalarWhereWithAggregatesInput = {
   NOT?: Prisma.DepartmentScalarWhereWithAggregatesInput | Prisma.DepartmentScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Department"> | string
   name?: Prisma.StringWithAggregatesFilter<"Department"> | string
-  type?: Prisma.EnumDepartmentTypeWithAggregatesFilter<"Department"> | $Enums.DepartmentType
+  facultyId?: Prisma.StringWithAggregatesFilter<"Department"> | string
   isActive?: Prisma.BoolWithAggregatesFilter<"Department"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Department"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Department"> | Date | string
@@ -243,17 +246,17 @@ export type DepartmentScalarWhereWithAggregatesInput = {
 export type DepartmentCreateInput = {
   id?: string
   name: string
-  type?: $Enums.DepartmentType
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  faculty: Prisma.FacultyCreateNestedOneWithoutDepartmentsInput
   applicants?: Prisma.ApplicantCreateNestedManyWithoutDepartmentInput
 }
 
 export type DepartmentUncheckedCreateInput = {
   id?: string
   name: string
-  type?: $Enums.DepartmentType
+  facultyId: string
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -263,17 +266,17 @@ export type DepartmentUncheckedCreateInput = {
 export type DepartmentUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumDepartmentTypeFieldUpdateOperationsInput | $Enums.DepartmentType
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  faculty?: Prisma.FacultyUpdateOneRequiredWithoutDepartmentsNestedInput
   applicants?: Prisma.ApplicantUpdateManyWithoutDepartmentNestedInput
 }
 
 export type DepartmentUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumDepartmentTypeFieldUpdateOperationsInput | $Enums.DepartmentType
+  facultyId?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -283,7 +286,7 @@ export type DepartmentUncheckedUpdateInput = {
 export type DepartmentCreateManyInput = {
   id?: string
   name: string
-  type?: $Enums.DepartmentType
+  facultyId: string
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -292,7 +295,6 @@ export type DepartmentCreateManyInput = {
 export type DepartmentUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumDepartmentTypeFieldUpdateOperationsInput | $Enums.DepartmentType
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -301,16 +303,26 @@ export type DepartmentUpdateManyMutationInput = {
 export type DepartmentUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumDepartmentTypeFieldUpdateOperationsInput | $Enums.DepartmentType
+  facultyId?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type DepartmentListRelationFilter = {
+  every?: Prisma.DepartmentWhereInput
+  some?: Prisma.DepartmentWhereInput
+  none?: Prisma.DepartmentWhereInput
+}
+
+export type DepartmentOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type DepartmentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  type?: Prisma.SortOrder
+  facultyId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -319,7 +331,7 @@ export type DepartmentCountOrderByAggregateInput = {
 export type DepartmentMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  type?: Prisma.SortOrder
+  facultyId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -328,7 +340,7 @@ export type DepartmentMaxOrderByAggregateInput = {
 export type DepartmentMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  type?: Prisma.SortOrder
+  facultyId?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -339,8 +351,46 @@ export type DepartmentScalarRelationFilter = {
   isNot?: Prisma.DepartmentWhereInput
 }
 
-export type EnumDepartmentTypeFieldUpdateOperationsInput = {
-  set?: $Enums.DepartmentType
+export type DepartmentCreateNestedManyWithoutFacultyInput = {
+  create?: Prisma.XOR<Prisma.DepartmentCreateWithoutFacultyInput, Prisma.DepartmentUncheckedCreateWithoutFacultyInput> | Prisma.DepartmentCreateWithoutFacultyInput[] | Prisma.DepartmentUncheckedCreateWithoutFacultyInput[]
+  connectOrCreate?: Prisma.DepartmentCreateOrConnectWithoutFacultyInput | Prisma.DepartmentCreateOrConnectWithoutFacultyInput[]
+  createMany?: Prisma.DepartmentCreateManyFacultyInputEnvelope
+  connect?: Prisma.DepartmentWhereUniqueInput | Prisma.DepartmentWhereUniqueInput[]
+}
+
+export type DepartmentUncheckedCreateNestedManyWithoutFacultyInput = {
+  create?: Prisma.XOR<Prisma.DepartmentCreateWithoutFacultyInput, Prisma.DepartmentUncheckedCreateWithoutFacultyInput> | Prisma.DepartmentCreateWithoutFacultyInput[] | Prisma.DepartmentUncheckedCreateWithoutFacultyInput[]
+  connectOrCreate?: Prisma.DepartmentCreateOrConnectWithoutFacultyInput | Prisma.DepartmentCreateOrConnectWithoutFacultyInput[]
+  createMany?: Prisma.DepartmentCreateManyFacultyInputEnvelope
+  connect?: Prisma.DepartmentWhereUniqueInput | Prisma.DepartmentWhereUniqueInput[]
+}
+
+export type DepartmentUpdateManyWithoutFacultyNestedInput = {
+  create?: Prisma.XOR<Prisma.DepartmentCreateWithoutFacultyInput, Prisma.DepartmentUncheckedCreateWithoutFacultyInput> | Prisma.DepartmentCreateWithoutFacultyInput[] | Prisma.DepartmentUncheckedCreateWithoutFacultyInput[]
+  connectOrCreate?: Prisma.DepartmentCreateOrConnectWithoutFacultyInput | Prisma.DepartmentCreateOrConnectWithoutFacultyInput[]
+  upsert?: Prisma.DepartmentUpsertWithWhereUniqueWithoutFacultyInput | Prisma.DepartmentUpsertWithWhereUniqueWithoutFacultyInput[]
+  createMany?: Prisma.DepartmentCreateManyFacultyInputEnvelope
+  set?: Prisma.DepartmentWhereUniqueInput | Prisma.DepartmentWhereUniqueInput[]
+  disconnect?: Prisma.DepartmentWhereUniqueInput | Prisma.DepartmentWhereUniqueInput[]
+  delete?: Prisma.DepartmentWhereUniqueInput | Prisma.DepartmentWhereUniqueInput[]
+  connect?: Prisma.DepartmentWhereUniqueInput | Prisma.DepartmentWhereUniqueInput[]
+  update?: Prisma.DepartmentUpdateWithWhereUniqueWithoutFacultyInput | Prisma.DepartmentUpdateWithWhereUniqueWithoutFacultyInput[]
+  updateMany?: Prisma.DepartmentUpdateManyWithWhereWithoutFacultyInput | Prisma.DepartmentUpdateManyWithWhereWithoutFacultyInput[]
+  deleteMany?: Prisma.DepartmentScalarWhereInput | Prisma.DepartmentScalarWhereInput[]
+}
+
+export type DepartmentUncheckedUpdateManyWithoutFacultyNestedInput = {
+  create?: Prisma.XOR<Prisma.DepartmentCreateWithoutFacultyInput, Prisma.DepartmentUncheckedCreateWithoutFacultyInput> | Prisma.DepartmentCreateWithoutFacultyInput[] | Prisma.DepartmentUncheckedCreateWithoutFacultyInput[]
+  connectOrCreate?: Prisma.DepartmentCreateOrConnectWithoutFacultyInput | Prisma.DepartmentCreateOrConnectWithoutFacultyInput[]
+  upsert?: Prisma.DepartmentUpsertWithWhereUniqueWithoutFacultyInput | Prisma.DepartmentUpsertWithWhereUniqueWithoutFacultyInput[]
+  createMany?: Prisma.DepartmentCreateManyFacultyInputEnvelope
+  set?: Prisma.DepartmentWhereUniqueInput | Prisma.DepartmentWhereUniqueInput[]
+  disconnect?: Prisma.DepartmentWhereUniqueInput | Prisma.DepartmentWhereUniqueInput[]
+  delete?: Prisma.DepartmentWhereUniqueInput | Prisma.DepartmentWhereUniqueInput[]
+  connect?: Prisma.DepartmentWhereUniqueInput | Prisma.DepartmentWhereUniqueInput[]
+  update?: Prisma.DepartmentUpdateWithWhereUniqueWithoutFacultyInput | Prisma.DepartmentUpdateWithWhereUniqueWithoutFacultyInput[]
+  updateMany?: Prisma.DepartmentUpdateManyWithWhereWithoutFacultyInput | Prisma.DepartmentUpdateManyWithWhereWithoutFacultyInput[]
+  deleteMany?: Prisma.DepartmentScalarWhereInput | Prisma.DepartmentScalarWhereInput[]
 }
 
 export type DepartmentCreateNestedOneWithoutApplicantsInput = {
@@ -357,19 +407,75 @@ export type DepartmentUpdateOneRequiredWithoutApplicantsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DepartmentUpdateToOneWithWhereWithoutApplicantsInput, Prisma.DepartmentUpdateWithoutApplicantsInput>, Prisma.DepartmentUncheckedUpdateWithoutApplicantsInput>
 }
 
-export type DepartmentCreateWithoutApplicantsInput = {
+export type DepartmentCreateWithoutFacultyInput = {
   id?: string
   name: string
-  type?: $Enums.DepartmentType
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  applicants?: Prisma.ApplicantCreateNestedManyWithoutDepartmentInput
+}
+
+export type DepartmentUncheckedCreateWithoutFacultyInput = {
+  id?: string
+  name: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  applicants?: Prisma.ApplicantUncheckedCreateNestedManyWithoutDepartmentInput
+}
+
+export type DepartmentCreateOrConnectWithoutFacultyInput = {
+  where: Prisma.DepartmentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DepartmentCreateWithoutFacultyInput, Prisma.DepartmentUncheckedCreateWithoutFacultyInput>
+}
+
+export type DepartmentCreateManyFacultyInputEnvelope = {
+  data: Prisma.DepartmentCreateManyFacultyInput | Prisma.DepartmentCreateManyFacultyInput[]
+  skipDuplicates?: boolean
+}
+
+export type DepartmentUpsertWithWhereUniqueWithoutFacultyInput = {
+  where: Prisma.DepartmentWhereUniqueInput
+  update: Prisma.XOR<Prisma.DepartmentUpdateWithoutFacultyInput, Prisma.DepartmentUncheckedUpdateWithoutFacultyInput>
+  create: Prisma.XOR<Prisma.DepartmentCreateWithoutFacultyInput, Prisma.DepartmentUncheckedCreateWithoutFacultyInput>
+}
+
+export type DepartmentUpdateWithWhereUniqueWithoutFacultyInput = {
+  where: Prisma.DepartmentWhereUniqueInput
+  data: Prisma.XOR<Prisma.DepartmentUpdateWithoutFacultyInput, Prisma.DepartmentUncheckedUpdateWithoutFacultyInput>
+}
+
+export type DepartmentUpdateManyWithWhereWithoutFacultyInput = {
+  where: Prisma.DepartmentScalarWhereInput
+  data: Prisma.XOR<Prisma.DepartmentUpdateManyMutationInput, Prisma.DepartmentUncheckedUpdateManyWithoutFacultyInput>
+}
+
+export type DepartmentScalarWhereInput = {
+  AND?: Prisma.DepartmentScalarWhereInput | Prisma.DepartmentScalarWhereInput[]
+  OR?: Prisma.DepartmentScalarWhereInput[]
+  NOT?: Prisma.DepartmentScalarWhereInput | Prisma.DepartmentScalarWhereInput[]
+  id?: Prisma.StringFilter<"Department"> | string
+  name?: Prisma.StringFilter<"Department"> | string
+  facultyId?: Prisma.StringFilter<"Department"> | string
+  isActive?: Prisma.BoolFilter<"Department"> | boolean
+  createdAt?: Prisma.DateTimeFilter<"Department"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Department"> | Date | string
+}
+
+export type DepartmentCreateWithoutApplicantsInput = {
+  id?: string
+  name: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  faculty: Prisma.FacultyCreateNestedOneWithoutDepartmentsInput
 }
 
 export type DepartmentUncheckedCreateWithoutApplicantsInput = {
   id?: string
   name: string
-  type?: $Enums.DepartmentType
+  facultyId: string
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -394,16 +500,50 @@ export type DepartmentUpdateToOneWithWhereWithoutApplicantsInput = {
 export type DepartmentUpdateWithoutApplicantsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumDepartmentTypeFieldUpdateOperationsInput | $Enums.DepartmentType
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  faculty?: Prisma.FacultyUpdateOneRequiredWithoutDepartmentsNestedInput
 }
 
 export type DepartmentUncheckedUpdateWithoutApplicantsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumDepartmentTypeFieldUpdateOperationsInput | $Enums.DepartmentType
+  facultyId?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type DepartmentCreateManyFacultyInput = {
+  id?: string
+  name: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type DepartmentUpdateWithoutFacultyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  applicants?: Prisma.ApplicantUpdateManyWithoutDepartmentNestedInput
+}
+
+export type DepartmentUncheckedUpdateWithoutFacultyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  applicants?: Prisma.ApplicantUncheckedUpdateManyWithoutDepartmentNestedInput
+}
+
+export type DepartmentUncheckedUpdateManyWithoutFacultyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -443,10 +583,11 @@ export type DepartmentCountOutputTypeCountApplicantsArgs<ExtArgs extends runtime
 export type DepartmentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  type?: boolean
+  facultyId?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  faculty?: boolean | Prisma.FacultyDefaultArgs<ExtArgs>
   applicants?: boolean | Prisma.Department$applicantsArgs<ExtArgs>
   _count?: boolean | Prisma.DepartmentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["department"]>
@@ -454,47 +595,55 @@ export type DepartmentSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type DepartmentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  type?: boolean
+  facultyId?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  faculty?: boolean | Prisma.FacultyDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["department"]>
 
 export type DepartmentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  type?: boolean
+  facultyId?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  faculty?: boolean | Prisma.FacultyDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["department"]>
 
 export type DepartmentSelectScalar = {
   id?: boolean
   name?: boolean
-  type?: boolean
+  facultyId?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type DepartmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "type" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["department"]>
+export type DepartmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "facultyId" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["department"]>
 export type DepartmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  faculty?: boolean | Prisma.FacultyDefaultArgs<ExtArgs>
   applicants?: boolean | Prisma.Department$applicantsArgs<ExtArgs>
   _count?: boolean | Prisma.DepartmentCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type DepartmentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type DepartmentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type DepartmentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  faculty?: boolean | Prisma.FacultyDefaultArgs<ExtArgs>
+}
+export type DepartmentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  faculty?: boolean | Prisma.FacultyDefaultArgs<ExtArgs>
+}
 
 export type $DepartmentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Department"
   objects: {
+    faculty: Prisma.$FacultyPayload<ExtArgs>
     applicants: Prisma.$ApplicantPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
-    type: $Enums.DepartmentType
+    facultyId: string
     isActive: boolean
     createdAt: Date
     updatedAt: Date
@@ -892,6 +1041,7 @@ readonly fields: DepartmentFieldRefs;
  */
 export interface Prisma__DepartmentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  faculty<T extends Prisma.FacultyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FacultyDefaultArgs<ExtArgs>>): Prisma.Prisma__FacultyClient<runtime.Types.Result.GetResult<Prisma.$FacultyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   applicants<T extends Prisma.Department$applicantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Department$applicantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApplicantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -924,7 +1074,7 @@ export interface Prisma__DepartmentClient<T, Null = never, ExtArgs extends runti
 export interface DepartmentFieldRefs {
   readonly id: Prisma.FieldRef<"Department", 'String'>
   readonly name: Prisma.FieldRef<"Department", 'String'>
-  readonly type: Prisma.FieldRef<"Department", 'DepartmentType'>
+  readonly facultyId: Prisma.FieldRef<"Department", 'String'>
   readonly isActive: Prisma.FieldRef<"Department", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Department", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Department", 'DateTime'>
@@ -1182,6 +1332,10 @@ export type DepartmentCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exte
    */
   data: Prisma.DepartmentCreateManyInput | Prisma.DepartmentCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DepartmentIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1252,6 +1406,10 @@ export type DepartmentUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Exte
    * Limit how many Departments to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DepartmentIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

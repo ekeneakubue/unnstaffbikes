@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
-import { updateApplicantStatus } from "../applicants/actions";
+import { updateApplicantStatus } from "@/lib/applicants/actions";
 
 export default function ApplicantStatusSelect({ id }: { id: string }) {
   const router = useRouter();

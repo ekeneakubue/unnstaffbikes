@@ -40,6 +40,9 @@ export type ApplicantMinAggregateOutputType = {
   status: $Enums.ApplicantStatus | null
   verifiedAt: Date | null
   verifiedById: string | null
+  isParked: boolean | null
+  parkedAt: Date | null
+  parkedById: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -60,6 +63,9 @@ export type ApplicantMaxAggregateOutputType = {
   status: $Enums.ApplicantStatus | null
   verifiedAt: Date | null
   verifiedById: string | null
+  isParked: boolean | null
+  parkedAt: Date | null
+  parkedById: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -80,6 +86,9 @@ export type ApplicantCountAggregateOutputType = {
   status: number
   verifiedAt: number
   verifiedById: number
+  isParked: number
+  parkedAt: number
+  parkedById: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -102,6 +111,9 @@ export type ApplicantMinAggregateInputType = {
   status?: true
   verifiedAt?: true
   verifiedById?: true
+  isParked?: true
+  parkedAt?: true
+  parkedById?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -122,6 +134,9 @@ export type ApplicantMaxAggregateInputType = {
   status?: true
   verifiedAt?: true
   verifiedById?: true
+  isParked?: true
+  parkedAt?: true
+  parkedById?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -142,6 +157,9 @@ export type ApplicantCountAggregateInputType = {
   status?: true
   verifiedAt?: true
   verifiedById?: true
+  isParked?: true
+  parkedAt?: true
+  parkedById?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -235,6 +253,9 @@ export type ApplicantGroupByOutputType = {
   status: $Enums.ApplicantStatus
   verifiedAt: Date | null
   verifiedById: string | null
+  isParked: boolean
+  parkedAt: Date | null
+  parkedById: string | null
   createdAt: Date
   updatedAt: Date
   _count: ApplicantCountAggregateOutputType | null
@@ -276,10 +297,14 @@ export type ApplicantWhereInput = {
   status?: Prisma.EnumApplicantStatusFilter<"Applicant"> | $Enums.ApplicantStatus
   verifiedAt?: Prisma.DateTimeNullableFilter<"Applicant"> | Date | string | null
   verifiedById?: Prisma.StringNullableFilter<"Applicant"> | string | null
+  isParked?: Prisma.BoolFilter<"Applicant"> | boolean
+  parkedAt?: Prisma.DateTimeNullableFilter<"Applicant"> | Date | string | null
+  parkedById?: Prisma.StringNullableFilter<"Applicant"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Applicant"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Applicant"> | Date | string
   department?: Prisma.XOR<Prisma.DepartmentScalarRelationFilter, Prisma.DepartmentWhereInput>
   verifiedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  parkedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type ApplicantOrderByWithRelationInput = {
@@ -298,10 +323,14 @@ export type ApplicantOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   verifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   verifiedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  isParked?: Prisma.SortOrder
+  parkedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  parkedById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   department?: Prisma.DepartmentOrderByWithRelationInput
   verifiedBy?: Prisma.UserOrderByWithRelationInput
+  parkedBy?: Prisma.UserOrderByWithRelationInput
 }
 
 export type ApplicantWhereUniqueInput = Prisma.AtLeast<{
@@ -323,10 +352,14 @@ export type ApplicantWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumApplicantStatusFilter<"Applicant"> | $Enums.ApplicantStatus
   verifiedAt?: Prisma.DateTimeNullableFilter<"Applicant"> | Date | string | null
   verifiedById?: Prisma.StringNullableFilter<"Applicant"> | string | null
+  isParked?: Prisma.BoolFilter<"Applicant"> | boolean
+  parkedAt?: Prisma.DateTimeNullableFilter<"Applicant"> | Date | string | null
+  parkedById?: Prisma.StringNullableFilter<"Applicant"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Applicant"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Applicant"> | Date | string
   department?: Prisma.XOR<Prisma.DepartmentScalarRelationFilter, Prisma.DepartmentWhereInput>
   verifiedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  parkedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id" | "staffNumber" | "motorcycleNo" | "engineNumber">
 
 export type ApplicantOrderByWithAggregationInput = {
@@ -345,6 +378,9 @@ export type ApplicantOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   verifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   verifiedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  isParked?: Prisma.SortOrder
+  parkedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  parkedById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ApplicantCountOrderByAggregateInput
@@ -371,6 +407,9 @@ export type ApplicantScalarWhereWithAggregatesInput = {
   status?: Prisma.EnumApplicantStatusWithAggregatesFilter<"Applicant"> | $Enums.ApplicantStatus
   verifiedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Applicant"> | Date | string | null
   verifiedById?: Prisma.StringNullableWithAggregatesFilter<"Applicant"> | string | null
+  isParked?: Prisma.BoolWithAggregatesFilter<"Applicant"> | boolean
+  parkedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Applicant"> | Date | string | null
+  parkedById?: Prisma.StringNullableWithAggregatesFilter<"Applicant"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Applicant"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Applicant"> | Date | string
 }
@@ -389,10 +428,13 @@ export type ApplicantCreateInput = {
   profilePhotoUrl?: string | null
   status?: $Enums.ApplicantStatus
   verifiedAt?: Date | string | null
+  isParked?: boolean
+  parkedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   department: Prisma.DepartmentCreateNestedOneWithoutApplicantsInput
   verifiedBy?: Prisma.UserCreateNestedOneWithoutVerifiedApplicantsInput
+  parkedBy?: Prisma.UserCreateNestedOneWithoutParkedApplicantsInput
 }
 
 export type ApplicantUncheckedCreateInput = {
@@ -411,6 +453,9 @@ export type ApplicantUncheckedCreateInput = {
   status?: $Enums.ApplicantStatus
   verifiedAt?: Date | string | null
   verifiedById?: string | null
+  isParked?: boolean
+  parkedAt?: Date | string | null
+  parkedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -429,10 +474,13 @@ export type ApplicantUpdateInput = {
   profilePhotoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicantStatusFieldUpdateOperationsInput | $Enums.ApplicantStatus
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isParked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parkedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.DepartmentUpdateOneRequiredWithoutApplicantsNestedInput
   verifiedBy?: Prisma.UserUpdateOneWithoutVerifiedApplicantsNestedInput
+  parkedBy?: Prisma.UserUpdateOneWithoutParkedApplicantsNestedInput
 }
 
 export type ApplicantUncheckedUpdateInput = {
@@ -451,6 +499,9 @@ export type ApplicantUncheckedUpdateInput = {
   status?: Prisma.EnumApplicantStatusFieldUpdateOperationsInput | $Enums.ApplicantStatus
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   verifiedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isParked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parkedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  parkedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -471,6 +522,9 @@ export type ApplicantCreateManyInput = {
   status?: $Enums.ApplicantStatus
   verifiedAt?: Date | string | null
   verifiedById?: string | null
+  isParked?: boolean
+  parkedAt?: Date | string | null
+  parkedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -489,6 +543,8 @@ export type ApplicantUpdateManyMutationInput = {
   profilePhotoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicantStatusFieldUpdateOperationsInput | $Enums.ApplicantStatus
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isParked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parkedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -509,6 +565,9 @@ export type ApplicantUncheckedUpdateManyInput = {
   status?: Prisma.EnumApplicantStatusFieldUpdateOperationsInput | $Enums.ApplicantStatus
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   verifiedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isParked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parkedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  parkedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -539,6 +598,9 @@ export type ApplicantCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   verifiedAt?: Prisma.SortOrder
   verifiedById?: Prisma.SortOrder
+  isParked?: Prisma.SortOrder
+  parkedAt?: Prisma.SortOrder
+  parkedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -559,6 +621,9 @@ export type ApplicantMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   verifiedAt?: Prisma.SortOrder
   verifiedById?: Prisma.SortOrder
+  isParked?: Prisma.SortOrder
+  parkedAt?: Prisma.SortOrder
+  parkedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -579,6 +644,9 @@ export type ApplicantMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   verifiedAt?: Prisma.SortOrder
   verifiedById?: Prisma.SortOrder
+  isParked?: Prisma.SortOrder
+  parkedAt?: Prisma.SortOrder
+  parkedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -590,10 +658,24 @@ export type ApplicantCreateNestedManyWithoutVerifiedByInput = {
   connect?: Prisma.ApplicantWhereUniqueInput | Prisma.ApplicantWhereUniqueInput[]
 }
 
+export type ApplicantCreateNestedManyWithoutParkedByInput = {
+  create?: Prisma.XOR<Prisma.ApplicantCreateWithoutParkedByInput, Prisma.ApplicantUncheckedCreateWithoutParkedByInput> | Prisma.ApplicantCreateWithoutParkedByInput[] | Prisma.ApplicantUncheckedCreateWithoutParkedByInput[]
+  connectOrCreate?: Prisma.ApplicantCreateOrConnectWithoutParkedByInput | Prisma.ApplicantCreateOrConnectWithoutParkedByInput[]
+  createMany?: Prisma.ApplicantCreateManyParkedByInputEnvelope
+  connect?: Prisma.ApplicantWhereUniqueInput | Prisma.ApplicantWhereUniqueInput[]
+}
+
 export type ApplicantUncheckedCreateNestedManyWithoutVerifiedByInput = {
   create?: Prisma.XOR<Prisma.ApplicantCreateWithoutVerifiedByInput, Prisma.ApplicantUncheckedCreateWithoutVerifiedByInput> | Prisma.ApplicantCreateWithoutVerifiedByInput[] | Prisma.ApplicantUncheckedCreateWithoutVerifiedByInput[]
   connectOrCreate?: Prisma.ApplicantCreateOrConnectWithoutVerifiedByInput | Prisma.ApplicantCreateOrConnectWithoutVerifiedByInput[]
   createMany?: Prisma.ApplicantCreateManyVerifiedByInputEnvelope
+  connect?: Prisma.ApplicantWhereUniqueInput | Prisma.ApplicantWhereUniqueInput[]
+}
+
+export type ApplicantUncheckedCreateNestedManyWithoutParkedByInput = {
+  create?: Prisma.XOR<Prisma.ApplicantCreateWithoutParkedByInput, Prisma.ApplicantUncheckedCreateWithoutParkedByInput> | Prisma.ApplicantCreateWithoutParkedByInput[] | Prisma.ApplicantUncheckedCreateWithoutParkedByInput[]
+  connectOrCreate?: Prisma.ApplicantCreateOrConnectWithoutParkedByInput | Prisma.ApplicantCreateOrConnectWithoutParkedByInput[]
+  createMany?: Prisma.ApplicantCreateManyParkedByInputEnvelope
   connect?: Prisma.ApplicantWhereUniqueInput | Prisma.ApplicantWhereUniqueInput[]
 }
 
@@ -611,6 +693,20 @@ export type ApplicantUpdateManyWithoutVerifiedByNestedInput = {
   deleteMany?: Prisma.ApplicantScalarWhereInput | Prisma.ApplicantScalarWhereInput[]
 }
 
+export type ApplicantUpdateManyWithoutParkedByNestedInput = {
+  create?: Prisma.XOR<Prisma.ApplicantCreateWithoutParkedByInput, Prisma.ApplicantUncheckedCreateWithoutParkedByInput> | Prisma.ApplicantCreateWithoutParkedByInput[] | Prisma.ApplicantUncheckedCreateWithoutParkedByInput[]
+  connectOrCreate?: Prisma.ApplicantCreateOrConnectWithoutParkedByInput | Prisma.ApplicantCreateOrConnectWithoutParkedByInput[]
+  upsert?: Prisma.ApplicantUpsertWithWhereUniqueWithoutParkedByInput | Prisma.ApplicantUpsertWithWhereUniqueWithoutParkedByInput[]
+  createMany?: Prisma.ApplicantCreateManyParkedByInputEnvelope
+  set?: Prisma.ApplicantWhereUniqueInput | Prisma.ApplicantWhereUniqueInput[]
+  disconnect?: Prisma.ApplicantWhereUniqueInput | Prisma.ApplicantWhereUniqueInput[]
+  delete?: Prisma.ApplicantWhereUniqueInput | Prisma.ApplicantWhereUniqueInput[]
+  connect?: Prisma.ApplicantWhereUniqueInput | Prisma.ApplicantWhereUniqueInput[]
+  update?: Prisma.ApplicantUpdateWithWhereUniqueWithoutParkedByInput | Prisma.ApplicantUpdateWithWhereUniqueWithoutParkedByInput[]
+  updateMany?: Prisma.ApplicantUpdateManyWithWhereWithoutParkedByInput | Prisma.ApplicantUpdateManyWithWhereWithoutParkedByInput[]
+  deleteMany?: Prisma.ApplicantScalarWhereInput | Prisma.ApplicantScalarWhereInput[]
+}
+
 export type ApplicantUncheckedUpdateManyWithoutVerifiedByNestedInput = {
   create?: Prisma.XOR<Prisma.ApplicantCreateWithoutVerifiedByInput, Prisma.ApplicantUncheckedCreateWithoutVerifiedByInput> | Prisma.ApplicantCreateWithoutVerifiedByInput[] | Prisma.ApplicantUncheckedCreateWithoutVerifiedByInput[]
   connectOrCreate?: Prisma.ApplicantCreateOrConnectWithoutVerifiedByInput | Prisma.ApplicantCreateOrConnectWithoutVerifiedByInput[]
@@ -622,6 +718,20 @@ export type ApplicantUncheckedUpdateManyWithoutVerifiedByNestedInput = {
   connect?: Prisma.ApplicantWhereUniqueInput | Prisma.ApplicantWhereUniqueInput[]
   update?: Prisma.ApplicantUpdateWithWhereUniqueWithoutVerifiedByInput | Prisma.ApplicantUpdateWithWhereUniqueWithoutVerifiedByInput[]
   updateMany?: Prisma.ApplicantUpdateManyWithWhereWithoutVerifiedByInput | Prisma.ApplicantUpdateManyWithWhereWithoutVerifiedByInput[]
+  deleteMany?: Prisma.ApplicantScalarWhereInput | Prisma.ApplicantScalarWhereInput[]
+}
+
+export type ApplicantUncheckedUpdateManyWithoutParkedByNestedInput = {
+  create?: Prisma.XOR<Prisma.ApplicantCreateWithoutParkedByInput, Prisma.ApplicantUncheckedCreateWithoutParkedByInput> | Prisma.ApplicantCreateWithoutParkedByInput[] | Prisma.ApplicantUncheckedCreateWithoutParkedByInput[]
+  connectOrCreate?: Prisma.ApplicantCreateOrConnectWithoutParkedByInput | Prisma.ApplicantCreateOrConnectWithoutParkedByInput[]
+  upsert?: Prisma.ApplicantUpsertWithWhereUniqueWithoutParkedByInput | Prisma.ApplicantUpsertWithWhereUniqueWithoutParkedByInput[]
+  createMany?: Prisma.ApplicantCreateManyParkedByInputEnvelope
+  set?: Prisma.ApplicantWhereUniqueInput | Prisma.ApplicantWhereUniqueInput[]
+  disconnect?: Prisma.ApplicantWhereUniqueInput | Prisma.ApplicantWhereUniqueInput[]
+  delete?: Prisma.ApplicantWhereUniqueInput | Prisma.ApplicantWhereUniqueInput[]
+  connect?: Prisma.ApplicantWhereUniqueInput | Prisma.ApplicantWhereUniqueInput[]
+  update?: Prisma.ApplicantUpdateWithWhereUniqueWithoutParkedByInput | Prisma.ApplicantUpdateWithWhereUniqueWithoutParkedByInput[]
+  updateMany?: Prisma.ApplicantUpdateManyWithWhereWithoutParkedByInput | Prisma.ApplicantUpdateManyWithWhereWithoutParkedByInput[]
   deleteMany?: Prisma.ApplicantScalarWhereInput | Prisma.ApplicantScalarWhereInput[]
 }
 
@@ -689,9 +799,12 @@ export type ApplicantCreateWithoutVerifiedByInput = {
   profilePhotoUrl?: string | null
   status?: $Enums.ApplicantStatus
   verifiedAt?: Date | string | null
+  isParked?: boolean
+  parkedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   department: Prisma.DepartmentCreateNestedOneWithoutApplicantsInput
+  parkedBy?: Prisma.UserCreateNestedOneWithoutParkedApplicantsInput
 }
 
 export type ApplicantUncheckedCreateWithoutVerifiedByInput = {
@@ -709,6 +822,9 @@ export type ApplicantUncheckedCreateWithoutVerifiedByInput = {
   profilePhotoUrl?: string | null
   status?: $Enums.ApplicantStatus
   verifiedAt?: Date | string | null
+  isParked?: boolean
+  parkedAt?: Date | string | null
+  parkedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -720,6 +836,60 @@ export type ApplicantCreateOrConnectWithoutVerifiedByInput = {
 
 export type ApplicantCreateManyVerifiedByInputEnvelope = {
   data: Prisma.ApplicantCreateManyVerifiedByInput | Prisma.ApplicantCreateManyVerifiedByInput[]
+  skipDuplicates?: boolean
+}
+
+export type ApplicantCreateWithoutParkedByInput = {
+  id?: string
+  firstname: string
+  surname: string
+  phoneNumber: string
+  staffNumber: string
+  stateOfOrigin: string
+  localGovernment: string
+  motorcycleNo: string
+  motorcycleMake: string
+  engineNumber: string
+  profilePhotoUrl?: string | null
+  status?: $Enums.ApplicantStatus
+  verifiedAt?: Date | string | null
+  isParked?: boolean
+  parkedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  department: Prisma.DepartmentCreateNestedOneWithoutApplicantsInput
+  verifiedBy?: Prisma.UserCreateNestedOneWithoutVerifiedApplicantsInput
+}
+
+export type ApplicantUncheckedCreateWithoutParkedByInput = {
+  id?: string
+  firstname: string
+  surname: string
+  phoneNumber: string
+  staffNumber: string
+  departmentId: string
+  stateOfOrigin: string
+  localGovernment: string
+  motorcycleNo: string
+  motorcycleMake: string
+  engineNumber: string
+  profilePhotoUrl?: string | null
+  status?: $Enums.ApplicantStatus
+  verifiedAt?: Date | string | null
+  verifiedById?: string | null
+  isParked?: boolean
+  parkedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ApplicantCreateOrConnectWithoutParkedByInput = {
+  where: Prisma.ApplicantWhereUniqueInput
+  create: Prisma.XOR<Prisma.ApplicantCreateWithoutParkedByInput, Prisma.ApplicantUncheckedCreateWithoutParkedByInput>
+}
+
+export type ApplicantCreateManyParkedByInputEnvelope = {
+  data: Prisma.ApplicantCreateManyParkedByInput | Prisma.ApplicantCreateManyParkedByInput[]
   skipDuplicates?: boolean
 }
 
@@ -758,8 +928,27 @@ export type ApplicantScalarWhereInput = {
   status?: Prisma.EnumApplicantStatusFilter<"Applicant"> | $Enums.ApplicantStatus
   verifiedAt?: Prisma.DateTimeNullableFilter<"Applicant"> | Date | string | null
   verifiedById?: Prisma.StringNullableFilter<"Applicant"> | string | null
+  isParked?: Prisma.BoolFilter<"Applicant"> | boolean
+  parkedAt?: Prisma.DateTimeNullableFilter<"Applicant"> | Date | string | null
+  parkedById?: Prisma.StringNullableFilter<"Applicant"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Applicant"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Applicant"> | Date | string
+}
+
+export type ApplicantUpsertWithWhereUniqueWithoutParkedByInput = {
+  where: Prisma.ApplicantWhereUniqueInput
+  update: Prisma.XOR<Prisma.ApplicantUpdateWithoutParkedByInput, Prisma.ApplicantUncheckedUpdateWithoutParkedByInput>
+  create: Prisma.XOR<Prisma.ApplicantCreateWithoutParkedByInput, Prisma.ApplicantUncheckedCreateWithoutParkedByInput>
+}
+
+export type ApplicantUpdateWithWhereUniqueWithoutParkedByInput = {
+  where: Prisma.ApplicantWhereUniqueInput
+  data: Prisma.XOR<Prisma.ApplicantUpdateWithoutParkedByInput, Prisma.ApplicantUncheckedUpdateWithoutParkedByInput>
+}
+
+export type ApplicantUpdateManyWithWhereWithoutParkedByInput = {
+  where: Prisma.ApplicantScalarWhereInput
+  data: Prisma.XOR<Prisma.ApplicantUpdateManyMutationInput, Prisma.ApplicantUncheckedUpdateManyWithoutParkedByInput>
 }
 
 export type ApplicantCreateWithoutDepartmentInput = {
@@ -776,9 +965,12 @@ export type ApplicantCreateWithoutDepartmentInput = {
   profilePhotoUrl?: string | null
   status?: $Enums.ApplicantStatus
   verifiedAt?: Date | string | null
+  isParked?: boolean
+  parkedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   verifiedBy?: Prisma.UserCreateNestedOneWithoutVerifiedApplicantsInput
+  parkedBy?: Prisma.UserCreateNestedOneWithoutParkedApplicantsInput
 }
 
 export type ApplicantUncheckedCreateWithoutDepartmentInput = {
@@ -796,6 +988,9 @@ export type ApplicantUncheckedCreateWithoutDepartmentInput = {
   status?: $Enums.ApplicantStatus
   verifiedAt?: Date | string | null
   verifiedById?: string | null
+  isParked?: boolean
+  parkedAt?: Date | string | null
+  parkedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -841,6 +1036,31 @@ export type ApplicantCreateManyVerifiedByInput = {
   profilePhotoUrl?: string | null
   status?: $Enums.ApplicantStatus
   verifiedAt?: Date | string | null
+  isParked?: boolean
+  parkedAt?: Date | string | null
+  parkedById?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ApplicantCreateManyParkedByInput = {
+  id?: string
+  firstname: string
+  surname: string
+  phoneNumber: string
+  staffNumber: string
+  departmentId: string
+  stateOfOrigin: string
+  localGovernment: string
+  motorcycleNo: string
+  motorcycleMake: string
+  engineNumber: string
+  profilePhotoUrl?: string | null
+  status?: $Enums.ApplicantStatus
+  verifiedAt?: Date | string | null
+  verifiedById?: string | null
+  isParked?: boolean
+  parkedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -859,9 +1079,12 @@ export type ApplicantUpdateWithoutVerifiedByInput = {
   profilePhotoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicantStatusFieldUpdateOperationsInput | $Enums.ApplicantStatus
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isParked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parkedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   department?: Prisma.DepartmentUpdateOneRequiredWithoutApplicantsNestedInput
+  parkedBy?: Prisma.UserUpdateOneWithoutParkedApplicantsNestedInput
 }
 
 export type ApplicantUncheckedUpdateWithoutVerifiedByInput = {
@@ -879,6 +1102,9 @@ export type ApplicantUncheckedUpdateWithoutVerifiedByInput = {
   profilePhotoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicantStatusFieldUpdateOperationsInput | $Enums.ApplicantStatus
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isParked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parkedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  parkedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -898,6 +1124,75 @@ export type ApplicantUncheckedUpdateManyWithoutVerifiedByInput = {
   profilePhotoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicantStatusFieldUpdateOperationsInput | $Enums.ApplicantStatus
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isParked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parkedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  parkedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ApplicantUpdateWithoutParkedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  surname?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  staffNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  stateOfOrigin?: Prisma.StringFieldUpdateOperationsInput | string
+  localGovernment?: Prisma.StringFieldUpdateOperationsInput | string
+  motorcycleNo?: Prisma.StringFieldUpdateOperationsInput | string
+  motorcycleMake?: Prisma.StringFieldUpdateOperationsInput | string
+  engineNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  profilePhotoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumApplicantStatusFieldUpdateOperationsInput | $Enums.ApplicantStatus
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isParked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parkedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  department?: Prisma.DepartmentUpdateOneRequiredWithoutApplicantsNestedInput
+  verifiedBy?: Prisma.UserUpdateOneWithoutVerifiedApplicantsNestedInput
+}
+
+export type ApplicantUncheckedUpdateWithoutParkedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  surname?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  staffNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  departmentId?: Prisma.StringFieldUpdateOperationsInput | string
+  stateOfOrigin?: Prisma.StringFieldUpdateOperationsInput | string
+  localGovernment?: Prisma.StringFieldUpdateOperationsInput | string
+  motorcycleNo?: Prisma.StringFieldUpdateOperationsInput | string
+  motorcycleMake?: Prisma.StringFieldUpdateOperationsInput | string
+  engineNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  profilePhotoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumApplicantStatusFieldUpdateOperationsInput | $Enums.ApplicantStatus
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  verifiedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isParked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parkedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ApplicantUncheckedUpdateManyWithoutParkedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  surname?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  staffNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  departmentId?: Prisma.StringFieldUpdateOperationsInput | string
+  stateOfOrigin?: Prisma.StringFieldUpdateOperationsInput | string
+  localGovernment?: Prisma.StringFieldUpdateOperationsInput | string
+  motorcycleNo?: Prisma.StringFieldUpdateOperationsInput | string
+  motorcycleMake?: Prisma.StringFieldUpdateOperationsInput | string
+  engineNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  profilePhotoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumApplicantStatusFieldUpdateOperationsInput | $Enums.ApplicantStatus
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  verifiedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isParked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parkedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -917,6 +1212,9 @@ export type ApplicantCreateManyDepartmentInput = {
   status?: $Enums.ApplicantStatus
   verifiedAt?: Date | string | null
   verifiedById?: string | null
+  isParked?: boolean
+  parkedAt?: Date | string | null
+  parkedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -935,9 +1233,12 @@ export type ApplicantUpdateWithoutDepartmentInput = {
   profilePhotoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumApplicantStatusFieldUpdateOperationsInput | $Enums.ApplicantStatus
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isParked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parkedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   verifiedBy?: Prisma.UserUpdateOneWithoutVerifiedApplicantsNestedInput
+  parkedBy?: Prisma.UserUpdateOneWithoutParkedApplicantsNestedInput
 }
 
 export type ApplicantUncheckedUpdateWithoutDepartmentInput = {
@@ -955,6 +1256,9 @@ export type ApplicantUncheckedUpdateWithoutDepartmentInput = {
   status?: Prisma.EnumApplicantStatusFieldUpdateOperationsInput | $Enums.ApplicantStatus
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   verifiedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isParked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parkedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  parkedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -974,6 +1278,9 @@ export type ApplicantUncheckedUpdateManyWithoutDepartmentInput = {
   status?: Prisma.EnumApplicantStatusFieldUpdateOperationsInput | $Enums.ApplicantStatus
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   verifiedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isParked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parkedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  parkedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -996,10 +1303,14 @@ export type ApplicantSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   status?: boolean
   verifiedAt?: boolean
   verifiedById?: boolean
+  isParked?: boolean
+  parkedAt?: boolean
+  parkedById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   department?: boolean | Prisma.DepartmentDefaultArgs<ExtArgs>
   verifiedBy?: boolean | Prisma.Applicant$verifiedByArgs<ExtArgs>
+  parkedBy?: boolean | Prisma.Applicant$parkedByArgs<ExtArgs>
 }, ExtArgs["result"]["applicant"]>
 
 export type ApplicantSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1018,10 +1329,14 @@ export type ApplicantSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   status?: boolean
   verifiedAt?: boolean
   verifiedById?: boolean
+  isParked?: boolean
+  parkedAt?: boolean
+  parkedById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   department?: boolean | Prisma.DepartmentDefaultArgs<ExtArgs>
   verifiedBy?: boolean | Prisma.Applicant$verifiedByArgs<ExtArgs>
+  parkedBy?: boolean | Prisma.Applicant$parkedByArgs<ExtArgs>
 }, ExtArgs["result"]["applicant"]>
 
 export type ApplicantSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1040,10 +1355,14 @@ export type ApplicantSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   status?: boolean
   verifiedAt?: boolean
   verifiedById?: boolean
+  isParked?: boolean
+  parkedAt?: boolean
+  parkedById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   department?: boolean | Prisma.DepartmentDefaultArgs<ExtArgs>
   verifiedBy?: boolean | Prisma.Applicant$verifiedByArgs<ExtArgs>
+  parkedBy?: boolean | Prisma.Applicant$parkedByArgs<ExtArgs>
 }, ExtArgs["result"]["applicant"]>
 
 export type ApplicantSelectScalar = {
@@ -1062,22 +1381,28 @@ export type ApplicantSelectScalar = {
   status?: boolean
   verifiedAt?: boolean
   verifiedById?: boolean
+  isParked?: boolean
+  parkedAt?: boolean
+  parkedById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ApplicantOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "surname" | "phoneNumber" | "staffNumber" | "departmentId" | "stateOfOrigin" | "localGovernment" | "motorcycleNo" | "motorcycleMake" | "engineNumber" | "profilePhotoUrl" | "status" | "verifiedAt" | "verifiedById" | "createdAt" | "updatedAt", ExtArgs["result"]["applicant"]>
+export type ApplicantOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "surname" | "phoneNumber" | "staffNumber" | "departmentId" | "stateOfOrigin" | "localGovernment" | "motorcycleNo" | "motorcycleMake" | "engineNumber" | "profilePhotoUrl" | "status" | "verifiedAt" | "verifiedById" | "isParked" | "parkedAt" | "parkedById" | "createdAt" | "updatedAt", ExtArgs["result"]["applicant"]>
 export type ApplicantInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   department?: boolean | Prisma.DepartmentDefaultArgs<ExtArgs>
   verifiedBy?: boolean | Prisma.Applicant$verifiedByArgs<ExtArgs>
+  parkedBy?: boolean | Prisma.Applicant$parkedByArgs<ExtArgs>
 }
 export type ApplicantIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   department?: boolean | Prisma.DepartmentDefaultArgs<ExtArgs>
   verifiedBy?: boolean | Prisma.Applicant$verifiedByArgs<ExtArgs>
+  parkedBy?: boolean | Prisma.Applicant$parkedByArgs<ExtArgs>
 }
 export type ApplicantIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   department?: boolean | Prisma.DepartmentDefaultArgs<ExtArgs>
   verifiedBy?: boolean | Prisma.Applicant$verifiedByArgs<ExtArgs>
+  parkedBy?: boolean | Prisma.Applicant$parkedByArgs<ExtArgs>
 }
 
 export type $ApplicantPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1085,6 +1410,7 @@ export type $ApplicantPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   objects: {
     department: Prisma.$DepartmentPayload<ExtArgs>
     verifiedBy: Prisma.$UserPayload<ExtArgs> | null
+    parkedBy: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1102,6 +1428,9 @@ export type $ApplicantPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     status: $Enums.ApplicantStatus
     verifiedAt: Date | null
     verifiedById: string | null
+    isParked: boolean
+    parkedAt: Date | null
+    parkedById: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["applicant"]>
@@ -1500,6 +1829,7 @@ export interface Prisma__ApplicantClient<T, Null = never, ExtArgs extends runtim
   readonly [Symbol.toStringTag]: "PrismaPromise"
   department<T extends Prisma.DepartmentDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DepartmentDefaultArgs<ExtArgs>>): Prisma.Prisma__DepartmentClient<runtime.Types.Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   verifiedBy<T extends Prisma.Applicant$verifiedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Applicant$verifiedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  parkedBy<T extends Prisma.Applicant$parkedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Applicant$parkedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1544,6 +1874,9 @@ export interface ApplicantFieldRefs {
   readonly status: Prisma.FieldRef<"Applicant", 'ApplicantStatus'>
   readonly verifiedAt: Prisma.FieldRef<"Applicant", 'DateTime'>
   readonly verifiedById: Prisma.FieldRef<"Applicant", 'String'>
+  readonly isParked: Prisma.FieldRef<"Applicant", 'Boolean'>
+  readonly parkedAt: Prisma.FieldRef<"Applicant", 'DateTime'>
+  readonly parkedById: Prisma.FieldRef<"Applicant", 'String'>
   readonly createdAt: Prisma.FieldRef<"Applicant", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Applicant", 'DateTime'>
 }
@@ -1950,6 +2283,25 @@ export type ApplicantDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Int
  * Applicant.verifiedBy
  */
 export type Applicant$verifiedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * Applicant.parkedBy
+ */
+export type Applicant$parkedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the User
    */

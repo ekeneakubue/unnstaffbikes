@@ -18,12 +18,6 @@ enum ApplicantStatus {
   REJECTED
 }
 
-enum DepartmentType {
-  DEPARTMENT
-  CENTER
-  UNIT
-}
-
 model User {
   id              String   @id @default(cuid())
   email           String   @unique
@@ -37,21 +31,44 @@ model User {
   updatedAt       DateTime @updatedAt
 
   verifiedApplicants Applicant[] @relation("VerifiedBy")
+  parkedApplicants   Applicant[] @relation("ParkedBy")
 
   @@map("users")
 }
 
-model Department {
-  id        String         @id @default(cuid())
-  name      String         @unique
-  type      DepartmentType @default(DEPARTMENT)
-  isActive  Boolean        @default(true)
-  createdAt DateTime       @default(now())
-  updatedAt DateTime       @updatedAt
+model Faculty {
+  id          String       @id @default(cuid())
+  name        String       @unique
+  isActive    Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  departments Department[]
 
+  @@map("faculties")
+}
+
+model Department {
+  id         String     @id @default(cuid())
+  name       String     @unique
+  facultyId  String
+  faculty    Faculty    @relation(fields: [facultyId], references: [id], onDelete: Restrict)
+  isActive   Boolean    @default(true)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
   applicants Applicant[]
 
+  @@index([facultyId])
   @@map("departments")
+}
+
+model Station {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("stations")
 }
 
 model Applicant {
@@ -72,6 +89,10 @@ model Applicant {
   verifiedAt      DateTime?
   verifiedById    String?
   verifiedBy      User?           @relation("VerifiedBy", fields: [verifiedById], references: [id], onDelete: SetNull)
+  isParked        Boolean         @default(false)
+  parkedAt        DateTime?
+  parkedById      String?
+  parkedBy        User?           @relation("ParkedBy", fields: [parkedById], references: [id], onDelete: SetNull)
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
 

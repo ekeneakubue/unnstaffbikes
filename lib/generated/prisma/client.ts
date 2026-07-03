@@ -47,10 +47,20 @@ export { Prisma }
  */
 export type User = Prisma.UserModel
 /**
+ * Model Faculty
+ * 
+ */
+export type Faculty = Prisma.FacultyModel
+/**
  * Model Department
  * 
  */
 export type Department = Prisma.DepartmentModel
+/**
+ * Model Station
+ * 
+ */
+export type Station = Prisma.StationModel
 /**
  * Model Applicant
  * 

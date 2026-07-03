@@ -1,4 +1,3 @@
-import type { DepartmentType } from "@/lib/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 
 export type RegistrationInput = {
@@ -55,22 +54,21 @@ export function parseRegistrationForm(formData: FormData): RegistrationInput | s
   };
 }
 
-function inferDepartmentType(name: string): DepartmentType {
-  const lower = name.toLowerCase();
-  if (lower.includes("center")) return "CENTER";
-  if (lower.includes("unit")) return "UNIT";
-  return "DEPARTMENT";
-}
-
-export async function findOrCreateDepartment(name: string) {
-  return prisma.department.upsert({
-    where: { name },
-    update: {},
-    create: {
-      name,
-      type: inferDepartmentType(name),
+export async function findDepartmentByName(name: string) {
+  const department = await prisma.department.findFirst({
+    where: {
+      name: { equals: name, mode: "insensitive" },
+      isActive: true,
     },
   });
+
+  if (!department) {
+    throw new Error(
+      "Department not found. Please enter a department that has been added by the admin.",
+    );
+  }
+
+  return department;
 }
 
 export async function findDuplicateApplicants(input: RegistrationInput) {
@@ -143,7 +141,7 @@ export async function createApplicant(input: RegistrationInput) {
     throw new Error(formatDuplicateApplicantsMessage(input, duplicates));
   }
 
-  const departmentRecord = await findOrCreateDepartment(input.department);
+  const departmentRecord = await findDepartmentByName(input.department);
 
   return prisma.applicant.create({
     data: {
@@ -244,6 +242,13 @@ export async function formatRegistrationError(
   if (
     error instanceof Error &&
     error.message.startsWith("A record with these details already exists")
+  ) {
+    return error.message;
+  }
+
+  if (
+    error instanceof Error &&
+    error.message.startsWith("Department not found")
   ) {
     return error.message;
   }

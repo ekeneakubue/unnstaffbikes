@@ -1,10 +1,13 @@
+import { requireAdmin } from "@/lib/auth/require-user";
 import AdminShell from "./components/AdminShell";
 
-export default function AdminLayout({
+export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  await requireAdmin();
+
   return (
     <div className="register-page min-h-screen bg-[#f4f7f5]">
       <div
