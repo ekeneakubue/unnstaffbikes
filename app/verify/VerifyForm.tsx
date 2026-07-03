@@ -7,8 +7,6 @@ import { useState } from "react";
 const inputClassName =
   "w-full rounded-xl border border-[#0B5D3B]/20 bg-white px-4 py-3 text-sm text-[#0f2419] outline-none transition duration-200 placeholder:text-[#8a9a90] focus:border-[#0B5D3B] focus:ring-2 focus:ring-[#0B5D3B]/15";
 
-type VerifyMethod = "staffNumber" | "regNo";
-
 type OwnerRecord = {
   firstname: string;
   surname: string;
@@ -18,15 +16,10 @@ type OwnerRecord = {
   motorcycleMake: string;
   engineNumber: string;
   photoUrl?: string;
+  status: "PENDING" | "APPROVED" | "REJECTED";
 };
 
-const verifyOptions: { value: VerifyMethod; label: string }[] = [
-  { value: "staffNumber", label: "Staff Number" },
-  { value: "regNo", label: "Reg No" },
-];
-
 export default function VerifyForm() {
-  const [method, setMethod] = useState<VerifyMethod>("staffNumber");
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
     "idle",
@@ -44,20 +37,32 @@ export default function VerifyForm() {
     setOwner(null);
     setErrorMessage("");
 
-    await new Promise((resolve) => window.setTimeout(resolve, 900));
+    try {
+      const response = await fetch(
+        `/api/verify?q=${encodeURIComponent(trimmedQuery)}`,
+      );
+      const result = (await response.json()) as {
+        owner?: OwnerRecord;
+        error?: string;
+      };
 
-    setStatus("error");
-    setErrorMessage(
-      "No registration found for this number. Please check the details and try again.",
-    );
-  }
+      if (!response.ok || !result.owner) {
+        throw new Error(
+          result.error ??
+            "No registration found for this number. Please check the details and try again.",
+        );
+      }
 
-  function handleMethodChange(nextMethod: VerifyMethod) {
-    setMethod(nextMethod);
-    setQuery("");
-    setStatus("idle");
-    setOwner(null);
-    setErrorMessage("");
+      setOwner(result.owner);
+      setStatus("success");
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "No registration found for this number. Please check the details and try again.",
+      );
+    }
   }
 
   return (
@@ -104,36 +109,11 @@ export default function VerifyForm() {
         <div className="register-enter register-enter-delay-3 rounded-2xl border border-[#0B5D3B]/10 bg-white p-5 shadow-[0_8px_32px_rgba(11,93,59,0.08)] sm:p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#0B5D3B]">
-                Verify by
-              </p>
-
-              <div className="mt-3 grid grid-cols-2 gap-2 rounded-xl bg-[#f4f7f5] p-1">
-                {verifyOptions.map((option) => (
-                  <button
-                    key={option.value}
-                    type="button"
-                    onClick={() => handleMethodChange(option.value)}
-                    className={`rounded-lg px-3 py-2.5 text-sm font-semibold transition duration-200 ${
-                      method === option.value
-                        ? "bg-[#0B5D3B] text-white shadow-sm"
-                        : "text-[#0B5D3B] hover:bg-white"
-                    }`}
-                  >
-                    {option.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div>
               <label
                 htmlFor="verifyQuery"
                 className="mb-1.5 block text-sm font-medium text-[#0f2419]"
               >
-                {method === "staffNumber"
-                  ? "Staff Number / Reg No"
-                  : "Motorcycle Reg No"}
+                Staff Number or Reg No
               </label>
               <input
                 id="verifyQuery"
@@ -142,11 +122,7 @@ export default function VerifyForm() {
                 required
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder={
-                  method === "staffNumber"
-                    ? "Enter staff or registration number"
-                    : "Enter motorcycle registration number"
-                }
+                placeholder="Enter staff number or registration number"
                 className={inputClassName}
               />
             </div>
@@ -183,9 +159,27 @@ export default function VerifyForm() {
                 <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-[#0B5D3B]">
                   Owner Details
                 </h2>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-[#0B5D3B]/10 px-3 py-1 text-xs font-semibold text-[#0B5D3B]">
-                  <span aria-hidden>✓</span>
-                  Verified
+                <span
+                  className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
+                    owner.status === "APPROVED"
+                      ? "bg-[#0B5D3B]/10 text-[#0B5D3B]"
+                      : owner.status === "PENDING"
+                        ? "bg-[#fff7ed] text-[#b45309]"
+                        : "bg-[#fef2f2] text-[#b91c1c]"
+                  }`}
+                >
+                  <span aria-hidden>
+                    {owner.status === "APPROVED"
+                      ? "✓"
+                      : owner.status === "PENDING"
+                        ? "…"
+                        : "!"}
+                  </span>
+                  {owner.status === "APPROVED"
+                    ? "Verified"
+                    : owner.status === "PENDING"
+                      ? "Pending approval"
+                      : "Rejected"}
                 </span>
               </div>
 
@@ -196,7 +190,7 @@ export default function VerifyForm() {
                       src={owner.photoUrl}
                       alt={`${owner.firstname} ${owner.surname}`}
                       fill
-                      unoptimized
+                      unoptimized={owner.photoUrl.startsWith("/uploads/")}
                       className="object-cover"
                     />
                   ) : (

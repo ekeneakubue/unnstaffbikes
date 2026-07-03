@@ -1,4 +1,5 @@
 import ApplicantAvatar from "./ApplicantAvatar";
+import ApplicantStatusSelect from "./ApplicantStatusSelect";
 import DeleteApplicantButton from "./DeleteApplicantButton";
 
 const statusStyles = {
@@ -32,10 +33,12 @@ export default function ApplicantsTable({
   applicants,
   emptyMessage = "No applicants found.",
   showDelete = false,
+  showStatusActions = false,
 }: {
   applicants: ApplicantRow[];
   emptyMessage?: string;
   showDelete?: boolean;
+  showStatusActions?: boolean;
 }) {
   if (applicants.length === 0) {
     return (
@@ -107,19 +110,26 @@ export default function ApplicantsTable({
                     </p>
                   </td>
                   <td className="px-4 py-3">
-                    <span
-                      className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ring-inset ${statusStyles[applicant.status]}`}
-                    >
-                      {applicant.status.charAt(0) +
-                        applicant.status.slice(1).toLowerCase()}
-                    </span>
+                    {showStatusActions && applicant.status === "PENDING" ? (
+                      <ApplicantStatusSelect id={applicant.id} />
+                    ) : (
+                      <span
+                        className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ring-inset ${statusStyles[applicant.status]}`}
+                      >
+                        {applicant.status.charAt(0) +
+                          applicant.status.slice(1).toLowerCase()}
+                      </span>
+                    )}
                   </td>
                   <td className="px-4 py-3 text-sm text-[#6b7f73]">
                     {formatDate(applicant.createdAt)}
                   </td>
                   {showDelete ? (
                     <td className="px-4 py-3">
-                      <DeleteApplicantButton id={applicant.id} name={fullName} />
+                      <DeleteApplicantButton
+                        id={applicant.id}
+                        name={fullName}
+                      />
                     </td>
                   ) : null}
                 </tr>

@@ -74,7 +74,11 @@ export default async function ApplicantsPage({
         })}
       </div>
 
-      <ApplicantsTable applicants={applicants} showDelete />
+      <ApplicantsTable
+        applicants={applicants}
+        showDelete
+        showStatusActions
+      />
     </div>
   );
 }
