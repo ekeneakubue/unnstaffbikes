@@ -1,6 +1,7 @@
 import ApplicantAvatar from "./ApplicantAvatar";
 import ApplicantStatusSelect from "./ApplicantStatusSelect";
 import DeleteApplicantButton from "./DeleteApplicantButton";
+import { formatPersonName } from "@/lib/format-name";
 
 const statusStyles = {
   PENDING: "bg-[#fff7ed] text-[#b45309] ring-[#fbbf24]/30",
@@ -11,6 +12,7 @@ const statusStyles = {
 type ApplicantRow = {
   id: string;
   firstname: string;
+  middlename: string | null;
   surname: string;
   staffNumber: string;
   department: { name: string };
@@ -77,7 +79,7 @@ export default function ApplicantsTable({
           </thead>
           <tbody className="divide-y divide-[#0B5D3B]/10 bg-white">
             {applicants.map((applicant) => {
-              const fullName = `${applicant.firstname} ${applicant.surname}`;
+              const fullName = formatPersonName(applicant);
 
               return (
                 <tr

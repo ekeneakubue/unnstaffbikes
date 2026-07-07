@@ -870,6 +870,7 @@ export type StationScalarFieldEnum = (typeof StationScalarFieldEnum)[keyof typeo
 export const ApplicantScalarFieldEnum = {
   id: 'id',
   firstname: 'firstname',
+  middlename: 'middlename',
   surname: 'surname',
   phoneNumber: 'phoneNumber',
   staffNumber: 'staffNumber',

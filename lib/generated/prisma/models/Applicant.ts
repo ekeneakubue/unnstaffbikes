@@ -27,6 +27,7 @@ export type AggregateApplicant = {
 export type ApplicantMinAggregateOutputType = {
   id: string | null
   firstname: string | null
+  middlename: string | null
   surname: string | null
   phoneNumber: string | null
   staffNumber: string | null
@@ -50,6 +51,7 @@ export type ApplicantMinAggregateOutputType = {
 export type ApplicantMaxAggregateOutputType = {
   id: string | null
   firstname: string | null
+  middlename: string | null
   surname: string | null
   phoneNumber: string | null
   staffNumber: string | null
@@ -73,6 +75,7 @@ export type ApplicantMaxAggregateOutputType = {
 export type ApplicantCountAggregateOutputType = {
   id: number
   firstname: number
+  middlename: number
   surname: number
   phoneNumber: number
   staffNumber: number
@@ -98,6 +101,7 @@ export type ApplicantCountAggregateOutputType = {
 export type ApplicantMinAggregateInputType = {
   id?: true
   firstname?: true
+  middlename?: true
   surname?: true
   phoneNumber?: true
   staffNumber?: true
@@ -121,6 +125,7 @@ export type ApplicantMinAggregateInputType = {
 export type ApplicantMaxAggregateInputType = {
   id?: true
   firstname?: true
+  middlename?: true
   surname?: true
   phoneNumber?: true
   staffNumber?: true
@@ -144,6 +149,7 @@ export type ApplicantMaxAggregateInputType = {
 export type ApplicantCountAggregateInputType = {
   id?: true
   firstname?: true
+  middlename?: true
   surname?: true
   phoneNumber?: true
   staffNumber?: true
@@ -240,6 +246,7 @@ export type ApplicantGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 export type ApplicantGroupByOutputType = {
   id: string
   firstname: string
+  middlename: string | null
   surname: string
   phoneNumber: string
   staffNumber: string
@@ -284,6 +291,7 @@ export type ApplicantWhereInput = {
   NOT?: Prisma.ApplicantWhereInput | Prisma.ApplicantWhereInput[]
   id?: Prisma.StringFilter<"Applicant"> | string
   firstname?: Prisma.StringFilter<"Applicant"> | string
+  middlename?: Prisma.StringNullableFilter<"Applicant"> | string | null
   surname?: Prisma.StringFilter<"Applicant"> | string
   phoneNumber?: Prisma.StringFilter<"Applicant"> | string
   staffNumber?: Prisma.StringFilter<"Applicant"> | string
@@ -310,6 +318,7 @@ export type ApplicantWhereInput = {
 export type ApplicantOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   firstname?: Prisma.SortOrder
+  middlename?: Prisma.SortOrderInput | Prisma.SortOrder
   surname?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
   staffNumber?: Prisma.SortOrder
@@ -342,6 +351,7 @@ export type ApplicantWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ApplicantWhereInput[]
   NOT?: Prisma.ApplicantWhereInput | Prisma.ApplicantWhereInput[]
   firstname?: Prisma.StringFilter<"Applicant"> | string
+  middlename?: Prisma.StringNullableFilter<"Applicant"> | string | null
   surname?: Prisma.StringFilter<"Applicant"> | string
   phoneNumber?: Prisma.StringFilter<"Applicant"> | string
   departmentId?: Prisma.StringFilter<"Applicant"> | string
@@ -365,6 +375,7 @@ export type ApplicantWhereUniqueInput = Prisma.AtLeast<{
 export type ApplicantOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   firstname?: Prisma.SortOrder
+  middlename?: Prisma.SortOrderInput | Prisma.SortOrder
   surname?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
   staffNumber?: Prisma.SortOrder
@@ -394,6 +405,7 @@ export type ApplicantScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ApplicantScalarWhereWithAggregatesInput | Prisma.ApplicantScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Applicant"> | string
   firstname?: Prisma.StringWithAggregatesFilter<"Applicant"> | string
+  middlename?: Prisma.StringNullableWithAggregatesFilter<"Applicant"> | string | null
   surname?: Prisma.StringWithAggregatesFilter<"Applicant"> | string
   phoneNumber?: Prisma.StringWithAggregatesFilter<"Applicant"> | string
   staffNumber?: Prisma.StringWithAggregatesFilter<"Applicant"> | string
@@ -417,6 +429,7 @@ export type ApplicantScalarWhereWithAggregatesInput = {
 export type ApplicantCreateInput = {
   id?: string
   firstname: string
+  middlename?: string | null
   surname: string
   phoneNumber: string
   staffNumber: string
@@ -440,6 +453,7 @@ export type ApplicantCreateInput = {
 export type ApplicantUncheckedCreateInput = {
   id?: string
   firstname: string
+  middlename?: string | null
   surname: string
   phoneNumber: string
   staffNumber: string
@@ -463,6 +477,7 @@ export type ApplicantUncheckedCreateInput = {
 export type ApplicantUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  middlename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   surname?: Prisma.StringFieldUpdateOperationsInput | string
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   staffNumber?: Prisma.StringFieldUpdateOperationsInput | string
@@ -486,6 +501,7 @@ export type ApplicantUpdateInput = {
 export type ApplicantUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  middlename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   surname?: Prisma.StringFieldUpdateOperationsInput | string
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   staffNumber?: Prisma.StringFieldUpdateOperationsInput | string
@@ -509,6 +525,7 @@ export type ApplicantUncheckedUpdateInput = {
 export type ApplicantCreateManyInput = {
   id?: string
   firstname: string
+  middlename?: string | null
   surname: string
   phoneNumber: string
   staffNumber: string
@@ -532,6 +549,7 @@ export type ApplicantCreateManyInput = {
 export type ApplicantUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  middlename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   surname?: Prisma.StringFieldUpdateOperationsInput | string
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   staffNumber?: Prisma.StringFieldUpdateOperationsInput | string
@@ -552,6 +570,7 @@ export type ApplicantUpdateManyMutationInput = {
 export type ApplicantUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  middlename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   surname?: Prisma.StringFieldUpdateOperationsInput | string
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   staffNumber?: Prisma.StringFieldUpdateOperationsInput | string
@@ -585,6 +604,7 @@ export type ApplicantOrderByRelationAggregateInput = {
 export type ApplicantCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   firstname?: Prisma.SortOrder
+  middlename?: Prisma.SortOrder
   surname?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
   staffNumber?: Prisma.SortOrder
@@ -608,6 +628,7 @@ export type ApplicantCountOrderByAggregateInput = {
 export type ApplicantMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   firstname?: Prisma.SortOrder
+  middlename?: Prisma.SortOrder
   surname?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
   staffNumber?: Prisma.SortOrder
@@ -631,6 +652,7 @@ export type ApplicantMaxOrderByAggregateInput = {
 export type ApplicantMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   firstname?: Prisma.SortOrder
+  middlename?: Prisma.SortOrder
   surname?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
   staffNumber?: Prisma.SortOrder
@@ -788,6 +810,7 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
 export type ApplicantCreateWithoutVerifiedByInput = {
   id?: string
   firstname: string
+  middlename?: string | null
   surname: string
   phoneNumber: string
   staffNumber: string
@@ -810,6 +833,7 @@ export type ApplicantCreateWithoutVerifiedByInput = {
 export type ApplicantUncheckedCreateWithoutVerifiedByInput = {
   id?: string
   firstname: string
+  middlename?: string | null
   surname: string
   phoneNumber: string
   staffNumber: string
@@ -842,6 +866,7 @@ export type ApplicantCreateManyVerifiedByInputEnvelope = {
 export type ApplicantCreateWithoutParkedByInput = {
   id?: string
   firstname: string
+  middlename?: string | null
   surname: string
   phoneNumber: string
   staffNumber: string
@@ -864,6 +889,7 @@ export type ApplicantCreateWithoutParkedByInput = {
 export type ApplicantUncheckedCreateWithoutParkedByInput = {
   id?: string
   firstname: string
+  middlename?: string | null
   surname: string
   phoneNumber: string
   staffNumber: string
@@ -915,6 +941,7 @@ export type ApplicantScalarWhereInput = {
   NOT?: Prisma.ApplicantScalarWhereInput | Prisma.ApplicantScalarWhereInput[]
   id?: Prisma.StringFilter<"Applicant"> | string
   firstname?: Prisma.StringFilter<"Applicant"> | string
+  middlename?: Prisma.StringNullableFilter<"Applicant"> | string | null
   surname?: Prisma.StringFilter<"Applicant"> | string
   phoneNumber?: Prisma.StringFilter<"Applicant"> | string
   staffNumber?: Prisma.StringFilter<"Applicant"> | string
@@ -954,6 +981,7 @@ export type ApplicantUpdateManyWithWhereWithoutParkedByInput = {
 export type ApplicantCreateWithoutDepartmentInput = {
   id?: string
   firstname: string
+  middlename?: string | null
   surname: string
   phoneNumber: string
   staffNumber: string
@@ -976,6 +1004,7 @@ export type ApplicantCreateWithoutDepartmentInput = {
 export type ApplicantUncheckedCreateWithoutDepartmentInput = {
   id?: string
   firstname: string
+  middlename?: string | null
   surname: string
   phoneNumber: string
   staffNumber: string
@@ -1024,6 +1053,7 @@ export type ApplicantUpdateManyWithWhereWithoutDepartmentInput = {
 export type ApplicantCreateManyVerifiedByInput = {
   id?: string
   firstname: string
+  middlename?: string | null
   surname: string
   phoneNumber: string
   staffNumber: string
@@ -1046,6 +1076,7 @@ export type ApplicantCreateManyVerifiedByInput = {
 export type ApplicantCreateManyParkedByInput = {
   id?: string
   firstname: string
+  middlename?: string | null
   surname: string
   phoneNumber: string
   staffNumber: string
@@ -1068,6 +1099,7 @@ export type ApplicantCreateManyParkedByInput = {
 export type ApplicantUpdateWithoutVerifiedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  middlename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   surname?: Prisma.StringFieldUpdateOperationsInput | string
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   staffNumber?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1090,6 +1122,7 @@ export type ApplicantUpdateWithoutVerifiedByInput = {
 export type ApplicantUncheckedUpdateWithoutVerifiedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  middlename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   surname?: Prisma.StringFieldUpdateOperationsInput | string
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   staffNumber?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1112,6 +1145,7 @@ export type ApplicantUncheckedUpdateWithoutVerifiedByInput = {
 export type ApplicantUncheckedUpdateManyWithoutVerifiedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  middlename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   surname?: Prisma.StringFieldUpdateOperationsInput | string
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   staffNumber?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1134,6 +1168,7 @@ export type ApplicantUncheckedUpdateManyWithoutVerifiedByInput = {
 export type ApplicantUpdateWithoutParkedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  middlename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   surname?: Prisma.StringFieldUpdateOperationsInput | string
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   staffNumber?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1156,6 +1191,7 @@ export type ApplicantUpdateWithoutParkedByInput = {
 export type ApplicantUncheckedUpdateWithoutParkedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  middlename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   surname?: Prisma.StringFieldUpdateOperationsInput | string
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   staffNumber?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1178,6 +1214,7 @@ export type ApplicantUncheckedUpdateWithoutParkedByInput = {
 export type ApplicantUncheckedUpdateManyWithoutParkedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  middlename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   surname?: Prisma.StringFieldUpdateOperationsInput | string
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   staffNumber?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1200,6 +1237,7 @@ export type ApplicantUncheckedUpdateManyWithoutParkedByInput = {
 export type ApplicantCreateManyDepartmentInput = {
   id?: string
   firstname: string
+  middlename?: string | null
   surname: string
   phoneNumber: string
   staffNumber: string
@@ -1222,6 +1260,7 @@ export type ApplicantCreateManyDepartmentInput = {
 export type ApplicantUpdateWithoutDepartmentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  middlename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   surname?: Prisma.StringFieldUpdateOperationsInput | string
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   staffNumber?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1244,6 +1283,7 @@ export type ApplicantUpdateWithoutDepartmentInput = {
 export type ApplicantUncheckedUpdateWithoutDepartmentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  middlename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   surname?: Prisma.StringFieldUpdateOperationsInput | string
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   staffNumber?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1266,6 +1306,7 @@ export type ApplicantUncheckedUpdateWithoutDepartmentInput = {
 export type ApplicantUncheckedUpdateManyWithoutDepartmentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  middlename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   surname?: Prisma.StringFieldUpdateOperationsInput | string
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   staffNumber?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1290,6 +1331,7 @@ export type ApplicantUncheckedUpdateManyWithoutDepartmentInput = {
 export type ApplicantSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   firstname?: boolean
+  middlename?: boolean
   surname?: boolean
   phoneNumber?: boolean
   staffNumber?: boolean
@@ -1316,6 +1358,7 @@ export type ApplicantSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type ApplicantSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   firstname?: boolean
+  middlename?: boolean
   surname?: boolean
   phoneNumber?: boolean
   staffNumber?: boolean
@@ -1342,6 +1385,7 @@ export type ApplicantSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
 export type ApplicantSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   firstname?: boolean
+  middlename?: boolean
   surname?: boolean
   phoneNumber?: boolean
   staffNumber?: boolean
@@ -1368,6 +1412,7 @@ export type ApplicantSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
 export type ApplicantSelectScalar = {
   id?: boolean
   firstname?: boolean
+  middlename?: boolean
   surname?: boolean
   phoneNumber?: boolean
   staffNumber?: boolean
@@ -1388,7 +1433,7 @@ export type ApplicantSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ApplicantOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "surname" | "phoneNumber" | "staffNumber" | "departmentId" | "stateOfOrigin" | "localGovernment" | "motorcycleNo" | "motorcycleMake" | "engineNumber" | "profilePhotoUrl" | "status" | "verifiedAt" | "verifiedById" | "isParked" | "parkedAt" | "parkedById" | "createdAt" | "updatedAt", ExtArgs["result"]["applicant"]>
+export type ApplicantOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "middlename" | "surname" | "phoneNumber" | "staffNumber" | "departmentId" | "stateOfOrigin" | "localGovernment" | "motorcycleNo" | "motorcycleMake" | "engineNumber" | "profilePhotoUrl" | "status" | "verifiedAt" | "verifiedById" | "isParked" | "parkedAt" | "parkedById" | "createdAt" | "updatedAt", ExtArgs["result"]["applicant"]>
 export type ApplicantInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   department?: boolean | Prisma.DepartmentDefaultArgs<ExtArgs>
   verifiedBy?: boolean | Prisma.Applicant$verifiedByArgs<ExtArgs>
@@ -1415,6 +1460,7 @@ export type $ApplicantPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     firstname: string
+    middlename: string | null
     surname: string
     phoneNumber: string
     staffNumber: string
@@ -1861,6 +1907,7 @@ export interface Prisma__ApplicantClient<T, Null = never, ExtArgs extends runtim
 export interface ApplicantFieldRefs {
   readonly id: Prisma.FieldRef<"Applicant", 'String'>
   readonly firstname: Prisma.FieldRef<"Applicant", 'String'>
+  readonly middlename: Prisma.FieldRef<"Applicant", 'String'>
   readonly surname: Prisma.FieldRef<"Applicant", 'String'>
   readonly phoneNumber: Prisma.FieldRef<"Applicant", 'String'>
   readonly staffNumber: Prisma.FieldRef<"Applicant", 'String'>

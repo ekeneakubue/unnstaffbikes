@@ -4,12 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { shouldBypassImageOptimization } from "@/lib/storage/photo-url";
+import { formatPersonName } from "@/lib/format-name";
 
 const inputClassName =
   "w-full rounded-xl border border-[#0B5D3B]/20 bg-white px-4 py-3 text-sm text-[#0f2419] outline-none transition duration-200 placeholder:text-[#8a9a90] focus:border-[#0B5D3B] focus:ring-2 focus:ring-[#0B5D3B]/15";
 
 type OwnerRecord = {
   firstname: string;
+  middlename: string | null;
   surname: string;
   staffNumber: string;
   department: string;
@@ -189,7 +191,7 @@ export default function VerifyForm() {
                   {owner.photoUrl ? (
                     <Image
                       src={owner.photoUrl}
-                      alt={`${owner.firstname} ${owner.surname}`}
+                      alt={formatPersonName(owner)}
                       fill
                       unoptimized={shouldBypassImageOptimization(owner.photoUrl)}
                       className="object-cover"
@@ -208,7 +210,7 @@ export default function VerifyForm() {
                       Full Name
                     </dt>
                     <dd className="mt-1 text-sm font-semibold text-[#0f2419]">
-                      {owner.firstname} {owner.surname}
+                      {formatPersonName(owner)}
                     </dd>
                   </div>
                   <div>

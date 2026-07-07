@@ -74,6 +74,7 @@ model Station {
 model Applicant {
   id              String          @id @default(cuid())
   firstname       String
+  middlename      String?
   surname         String
   phoneNumber     String
   staffNumber     String          @unique

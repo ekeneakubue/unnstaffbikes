@@ -168,8 +168,7 @@ export default function RegisterForm() {
           </div>
 
           <p className="register-enter register-enter-delay-2 mt-3 max-w-2xl text-sm leading-relaxed text-[#4a5f52] sm:text-base">
-            Complete the form below to document your motorcycle for campus
-            identification and ownership verification.
+            Complete the form below to document your motorcycle for ownership verification.
           </p>
         </header>
 
@@ -188,10 +187,12 @@ export default function RegisterForm() {
                 onCapture={handleAvatarCapture}
               />
 
-              <p className="mt-3 max-w-xs text-center text-xs text-[#6b7f73]">
-                Tap to open your camera and capture a clear passport-style
-                photo.
+              <p className="mt-3 max-w-xs text-center text-xs text-[#393b3a]">
+                Tap to capture/upload a clear passport photo. 
+                <br />
+                (Limit 50kb size)
               </p>
+              
             </div>
           </RevealSection>
 
@@ -209,6 +210,17 @@ export default function RegisterForm() {
                   required
                   autoComplete="given-name"
                   placeholder="Enter first name"
+                  className={inputClassName}
+                />
+              </Field>
+
+              <Field id="middlename" label="Middle Name">
+                <input
+                  id="middlename"
+                  name="middlename"
+                  type="text"
+                  autoComplete="additional-name"
+                  placeholder="Enter middle name (optional)"
                   className={inputClassName}
                 />
               </Field>
@@ -318,7 +330,7 @@ export default function RegisterForm() {
             </h2>
 
             <div className="mt-5 grid gap-5 sm:grid-cols-2">
-              <Field id="motorcycleNo" label="Motorcycle No">
+              <Field id="motorcycleNo" label="Plate No.">
                 <input
                   id="motorcycleNo"
                   name="motorcycleNo"
@@ -329,7 +341,7 @@ export default function RegisterForm() {
                 />
               </Field>
 
-              <Field id="motorcycleMake" label="Motorcycle Make">
+              <Field id="motorcycleMake" label="Make/Model">
                 <input
                   id="motorcycleMake"
                   name="motorcycleMake"
@@ -341,7 +353,7 @@ export default function RegisterForm() {
               </Field>
 
               <div className="sm:col-span-2">
-                <Field id="engineNumber" label="Engine Number">
+                <Field id="engineNumber" label="Engine No.">
                   <input
                     id="engineNumber"
                     name="engineNumber"

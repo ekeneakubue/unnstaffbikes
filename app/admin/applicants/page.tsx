@@ -19,6 +19,7 @@ export default async function ApplicantsPage({
     select: {
       id: true,
       firstname: true,
+      middlename: true,
       surname: true,
       staffNumber: true,
       department: { select: { name: true } },

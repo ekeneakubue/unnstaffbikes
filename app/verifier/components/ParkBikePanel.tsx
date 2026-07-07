@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useTransition } from "react";
 import ApplicantAvatar from "@/app/admin/components/ApplicantAvatar";
+import { formatPersonName } from "@/lib/format-name";
 import { lookupBikeForParking, toggleParkBike } from "../actions";
 
 const inputClassName =
@@ -18,6 +19,7 @@ type BikeState = {
 
 function mapBikeState(bike: {
   firstname: string;
+  middlename: string | null;
   surname: string;
   staffNumber: string;
   motorcycleNo: string;
@@ -26,7 +28,7 @@ function mapBikeState(bike: {
   photoUrl?: string;
 }): BikeState {
   return {
-    name: `${bike.firstname} ${bike.surname}`,
+    name: formatPersonName(bike),
     staffNumber: bike.staffNumber,
     motorcycleNo: bike.motorcycleNo,
     isParked: bike.isParked,

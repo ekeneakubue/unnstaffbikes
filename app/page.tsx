@@ -10,28 +10,28 @@ export default function Home() {
       />
 
       <main className="relative z-10 mx-auto flex h-full w-full max-w-3xl flex-col items-center justify-center px-6 py-8 text-center sm:px-10">
-        <div className="mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-white shadow-[0_8px_32px_rgba(11,93,59,0.12)] ring-1 ring-[#0B5D3B]/10 sm:mb-8 sm:h-28 sm:w-28">
-          <Image
-            src="/unn-logo.svg"
-            alt="University of Nigeria, Nsukka logo"
-            width={96}
-            height={96}
-            priority
-            className="h-20 w-20 sm:h-24 sm:w-24"
-          />
-        </div>
+          <div className="rounded-full flex p-6 mb-10 items-center justify-center bg-white">
+            <Image
+              src="/images/logo.png"
+              alt="University of Nigeria, Nsukka logo"
+              width={96}
+              height={40}
+              priority
+              className=" object-cover sm:h-24 sm:w-24 "
+            />
+          </div>
 
         <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#0B5D3B] sm:text-sm">
           University of Nigeria, Nsukka
         </p>
 
         <h1 className="mt-3 max-w-xl text-3xl font-bold leading-tight tracking-tight text-[#0f2419] sm:mt-4 sm:text-4xl">
-          Staff Bike Registration Portal
+          Bike Registration Portal
         </h1>
 
         <p className="mt-4 max-w-lg text-sm leading-relaxed text-[#4a5f52] sm:mt-5 sm:text-base">
-          A secure platform for UNN staff to register personal motorcycles and bicycles for
-          proper documentation, campus identification, and ownership verification.
+          A secure platform for staff and students to register personal motorcycles
+          for proper documentation and ownership verification.
         </p>
 
         <div className="mt-8 flex w-full max-w-xl flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:justify-center">

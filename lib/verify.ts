@@ -1,3 +1,4 @@
+import { formatPersonName } from "@/lib/format-name";
 import { Prisma } from "@/lib/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import { normalizeVerificationQuery } from "@/lib/normalize-verification-query";
@@ -5,6 +6,7 @@ import { getPhotoSrc } from "@/lib/storage/photo-url";
 
 export type VerifiedOwner = {
   firstname: string;
+  middlename: string | null;
   surname: string;
   staffNumber: string;
   department: string;
@@ -17,6 +19,7 @@ export type VerifiedOwner = {
 
 type VerificationRow = {
   firstname: string;
+  middlename: string | null;
   surname: string;
   staffNumber: string;
   motorcycleNo: string;
@@ -30,6 +33,7 @@ type VerificationRow = {
 function mapVerificationRow(row: VerificationRow): VerifiedOwner {
   return {
     firstname: row.firstname,
+    middlename: row.middlename,
     surname: row.surname,
     staffNumber: row.staffNumber,
     department: row.departmentName,
@@ -53,6 +57,7 @@ export async function findApplicantForVerification(
   const rows = await prisma.$queryRaw<VerificationRow[]>(Prisma.sql`
     SELECT
       a."firstname",
+      a."middlename",
       a."surname",
       a."staffNumber",
       a."motorcycleNo",

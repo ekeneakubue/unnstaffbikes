@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { requireStaffUser } from "@/lib/auth/require-user";
+import { formatPersonName } from "@/lib/format-name";
 import { findApplicantForParking } from "@/lib/parking";
 import { prisma } from "@/lib/prisma";
 import { getPhotoSrc } from "@/lib/storage/photo-url";
@@ -12,6 +13,7 @@ export type ToggleParkResult = {
   message?: string;
   bike?: {
     firstname: string;
+    middlename: string | null;
     surname: string;
     staffNumber: string;
     motorcycleNo: string;
@@ -25,6 +27,7 @@ export type LookupBikeResult = {
   error?: string;
   bike?: {
     firstname: string;
+    middlename: string | null;
     surname: string;
     staffNumber: string;
     motorcycleNo: string;
@@ -55,6 +58,7 @@ export async function lookupBikeForParking(
   return {
     bike: {
       firstname: applicant.firstname,
+      middlename: applicant.middlename,
       surname: applicant.surname,
       staffNumber: applicant.staffNumber,
       motorcycleNo: applicant.motorcycleNo,
@@ -109,10 +113,11 @@ export async function toggleParkBike(query: string): Promise<ToggleParkResult> {
     return {
       success: true,
       message: nextParked
-        ? `${applicant.firstname} ${applicant.surname}'s bike is now parked.`
-        : `${applicant.firstname} ${applicant.surname}'s bike has been unparked.`,
+        ? `${formatPersonName(applicant)}'s bike is now parked.`
+        : `${formatPersonName(applicant)}'s bike has been unparked.`,
       bike: {
         firstname: applicant.firstname,
+        middlename: applicant.middlename,
         surname: applicant.surname,
         staffNumber: applicant.staffNumber,
         motorcycleNo: applicant.motorcycleNo,

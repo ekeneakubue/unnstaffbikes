@@ -1,7 +1,9 @@
+import { formatPersonName } from "@/lib/format-name";
 import { prisma } from "@/lib/prisma";
 
 export type RegistrationInput = {
   firstname: string;
+  middlename: string | null;
   surname: string;
   phoneNumber: string;
   staffNumber: string;
@@ -16,6 +18,7 @@ export type RegistrationInput = {
 
 export function parseRegistrationForm(formData: FormData): RegistrationInput | string {
   const firstname = String(formData.get("firstname") ?? "").trim();
+  const middlename = String(formData.get("middlename") ?? "").trim();
   const surname = String(formData.get("surname") ?? "").trim();
   const phoneNumber = String(formData.get("phoneNumber") ?? "").trim();
   const staffNumber = String(formData.get("staffNumber") ?? "").trim();
@@ -41,6 +44,7 @@ export function parseRegistrationForm(formData: FormData): RegistrationInput | s
 
   return {
     firstname,
+    middlename: middlename || null,
     surname,
     phoneNumber,
     staffNumber,
@@ -82,6 +86,7 @@ export async function findDuplicateApplicants(input: RegistrationInput) {
     },
     select: {
       firstname: true,
+      middlename: true,
       surname: true,
       staffNumber: true,
       motorcycleNo: true,
@@ -124,7 +129,7 @@ export function formatDuplicateApplicantsMessage(
   }
 
   const lines = matches.map((record) => {
-    const name = `${record.firstname} ${record.surname}`;
+    const name = formatPersonName(record);
     const conflicts = duplicateFieldsForRecord(input, record);
     const status =
       record.status.charAt(0) + record.status.slice(1).toLowerCase();
@@ -146,6 +151,7 @@ export async function createApplicant(input: RegistrationInput) {
   return prisma.applicant.create({
     data: {
       firstname: input.firstname,
+      middlename: input.middlename,
       surname: input.surname,
       phoneNumber: input.phoneNumber,
       staffNumber: input.staffNumber,

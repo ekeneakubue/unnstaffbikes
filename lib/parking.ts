@@ -5,6 +5,7 @@ import { normalizeVerificationQuery } from "@/lib/normalize-verification-query";
 export type ParkingBike = {
   id: string;
   firstname: string;
+  middlename: string | null;
   surname: string;
   staffNumber: string;
   motorcycleNo: string;
@@ -17,6 +18,7 @@ export type ParkingBike = {
 type ParkingRow = {
   id: string;
   firstname: string;
+  middlename: string | null;
   surname: string;
   staffNumber: string;
   motorcycleNo: string;
@@ -48,6 +50,7 @@ export async function findApplicantForParking(
     SELECT
       a."id",
       a."firstname",
+      a."middlename",
       a."surname",
       a."staffNumber",
       a."motorcycleNo",
